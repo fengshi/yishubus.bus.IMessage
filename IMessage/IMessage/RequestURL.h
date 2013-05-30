@@ -10,4 +10,6 @@
 
 @interface RequestURL : NSObject
 
++ (NSString *) getUrlByKey: (NSInteger) key;
+
 @end

@@ -10,4 +10,6 @@
 
 @interface NetWorkData : NSObject
 
++ (BOOL) loginData:(NSString *)url email:(NSString *)mail password:(NSString *)pass;
+
 @end

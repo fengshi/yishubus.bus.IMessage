@@ -10,4 +10,6 @@
 
 @interface IMessageViewController : UIViewController
 
+@property (strong, nonatomic) UITabBarController *tabBarController;
+
 @end

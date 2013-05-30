@@ -7,6 +7,8 @@
 //
 
 #import "LoginViewController.h"
+#import "IMessageService.h"
+#import "IMessageViewController.h"
 
 @interface LoginViewController ()
 
@@ -35,4 +37,19 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)loginAction:(id)sender {
+    NSString *mail = self.userTextField.text;
+    NSString *password = self.passTextField.text;
+    
+    IMessageService *service = [[IMessageService alloc] init];
+    BOOL isOrno = [service isLogin:mail password:password];
+    if (isOrno) {
+        IMessageViewController *con = [[IMessageViewController alloc] init];
+        self.view.window.rootViewController = con;
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"登录失败!" message:@"用户名或密码输入错误!" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+    
+}
 @end

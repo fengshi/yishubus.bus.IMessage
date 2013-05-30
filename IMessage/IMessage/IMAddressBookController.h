@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IMAddressBookController : UIViewController
+@interface IMAddressBookController : UIViewController<UITableViewDelegate,UITableViewDataSource>
+
+@property (strong, nonatomic) IBOutlet UITableView *tView;
 
 @end

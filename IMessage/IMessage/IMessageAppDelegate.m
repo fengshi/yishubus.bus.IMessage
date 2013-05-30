@@ -7,13 +7,27 @@
 //
 
 #import "IMessageAppDelegate.h"
+#import "IMessageViewController.h"
+#import "LoginViewController.h"
 
 @implementation IMessageAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
+
+    NSString *login = [[NSUserDefaults standardUserDefaults] objectForKey:@"mail"];
+    login = @"abc";
+    //    self.window.rootViewController = con;
+    
+    if (!login) {
+        LoginViewController *loginController = [[LoginViewController alloc] init];
+        self.window.rootViewController = loginController;
+    } else {
+        IMessageViewController *con = [[IMessageViewController alloc] init];
+        self.window.rootViewController = con;
+    }
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;

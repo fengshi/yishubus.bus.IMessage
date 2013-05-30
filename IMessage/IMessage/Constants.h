@@ -6,9 +6,13 @@
 //  Copyright (c) 2013年 yishubus. All rights reserved.
 //
 
-#ifndef IMessage_Constants_h
-#define IMessage_Constants_h
+typedef enum _NSUserType
+{
+    UserTypeTeacher = 2,
+    UserTypeUser = 1
+} NSUserType;
 
+#define OPEN_FILE_SERVER @"yishubus-pc"
+#define ACTION_MAIN      @"http://192.168.0.105:7878/"
 
-
-#endif
+#define LOGIN_URL        1

@@ -10,4 +10,6 @@
 
 @interface IMessageService : NSObject
 
+- (BOOL) isLogin:(NSString *)email password:(NSString *)pass;
+
 @end
