@@ -9,6 +9,7 @@
 #import "IMessageViewController.h"
 #import "ShowMessageViewController.h"
 #import "IMAddressBookController.h"
+#import "IMSettingViewController.h"
 
 @interface IMessageViewController ()
 
@@ -39,7 +40,11 @@
     UINavigationController *bookNav = [[UINavigationController alloc] initWithRootViewController:bookController];
     bookNav.navigationBar.tintColor = [UIColor colorWithRed:50/255.0 green:50/255.0 blue:50/255.0 alpha:0];
     
-    self.tabBarController.viewControllers = [NSArray arrayWithObjects:messageNav,bookNav, nil];
+    IMSettingViewController *settingController = [[IMSettingViewController alloc] initWithNibName:@"IMSettingViewController" bundle:nil];
+    UINavigationController *settingNav = [[UINavigationController alloc] initWithRootViewController:settingController];
+    settingNav.navigationBar.tintColor = [UIColor colorWithRed:50/255.0 green:50/255.0 blue:50/255.0 alpha:0];
+    
+    self.tabBarController.viewControllers = [NSArray arrayWithObjects:messageNav,bookNav,settingNav, nil];
     
     [self.view addSubview:self.tabBarController.view];
 }
