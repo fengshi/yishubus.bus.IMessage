@@ -88,6 +88,8 @@
 		8B1D0E0F17575BAB00A17375 /* IMAddressBookController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B1D0E0D17575BAB00A17375 /* IMAddressBookController.xib */; };
 		8B1D0E1217575EDB00A17375 /* bar1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B1D0E1017575EDB00A17375 /* bar1.png */; };
 		8B1D0E1317575EDB00A17375 /* bar1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B1D0E1117575EDB00A17375 /* bar1@2x.png */; };
+		8B1D0E1717584DC500A17375 /* IMSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1D0E1517584DC500A17375 /* IMSettingViewController.m */; };
+		8B1D0E1817584DC500A17375 /* IMSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B1D0E1617584DC500A17375 /* IMSettingViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -242,6 +244,9 @@
 		8B1D0E0D17575BAB00A17375 /* IMAddressBookController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IMAddressBookController.xib; sourceTree = "<group>"; };
 		8B1D0E1017575EDB00A17375 /* bar1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bar1.png; sourceTree = "<group>"; };
 		8B1D0E1117575EDB00A17375 /* bar1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bar1@2x.png"; sourceTree = "<group>"; };
+		8B1D0E1417584DC500A17375 /* IMSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMSettingViewController.h; sourceTree = "<group>"; };
+		8B1D0E1517584DC500A17375 /* IMSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMSettingViewController.m; sourceTree = "<group>"; };
+		8B1D0E1617584DC500A17375 /* IMSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IMSettingViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -335,6 +340,9 @@
 				8B1D0E0B17575BAB00A17375 /* IMAddressBookController.h */,
 				8B1D0E0C17575BAB00A17375 /* IMAddressBookController.m */,
 				8B1D0E0D17575BAB00A17375 /* IMAddressBookController.xib */,
+				8B1D0E1417584DC500A17375 /* IMSettingViewController.h */,
+				8B1D0E1517584DC500A17375 /* IMSettingViewController.m */,
+				8B1D0E1617584DC500A17375 /* IMSettingViewController.xib */,
 			);
 			path = IMessage;
 			sourceTree = "<group>";
@@ -721,6 +729,7 @@
 				8B1D0E0F17575BAB00A17375 /* IMAddressBookController.xib in Resources */,
 				8B1D0E1217575EDB00A17375 /* bar1.png in Resources */,
 				8B1D0E1317575EDB00A17375 /* bar1@2x.png in Resources */,
+				8B1D0E1817584DC500A17375 /* IMSettingViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -786,6 +795,7 @@
 				8B1D0E0517575A3500A17375 /* IMessageViewController.m in Sources */,
 				8B1D0E0817575A8700A17375 /* ShowMessageViewController.m in Sources */,
 				8B1D0E0E17575BAB00A17375 /* IMAddressBookController.m in Sources */,
+				8B1D0E1717584DC500A17375 /* IMSettingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -910,6 +920,7 @@
 				8B1D0D271757550C00A17375 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

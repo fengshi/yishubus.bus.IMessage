@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IMSettingViewController : UIViewController
+@interface IMSettingViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+
+
+@property (strong, nonatomic) IBOutlet UITableView *tView;
 
 @end
