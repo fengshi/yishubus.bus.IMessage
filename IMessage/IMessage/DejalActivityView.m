@@ -81,7 +81,8 @@ static DejalActivityView *dejalActivityView = nil;
 
 + (DejalActivityView *)activityViewForView:(UIView *)addToView;
 {
-    return [self activityViewForView:addToView withLabel:NSLocalizedString(@"Loading...", @"Default DejalActivtyView label text") width:0];
+//    return [self activityViewForView:addToView withLabel:NSLocalizedString(@"Loading...", @"Default DejalActivtyView label text") width:0];
+    return [self activityViewForView:addToView withLabel:@"加载中..." width:10];
 }
 
 /*
@@ -278,7 +279,7 @@ static DejalActivityView *dejalActivityView = nil;
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
     
     label.font = [UIFont systemFontOfSize:[UIFont systemFontSize]];
-    label.textAlignment = UITextAlignmentLeft;
+    label.textAlignment = NSTextAlignmentLeft;
     label.textColor = [UIColor blackColor];
     label.backgroundColor = [UIColor clearColor];
     label.shadowColor = [UIColor whiteColor];
@@ -534,11 +535,11 @@ static DejalActivityView *dejalActivityView = nil;
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
     
     label.font = [UIFont boldSystemFontOfSize:[UIFont systemFontSize]];
-    label.textAlignment = UITextAlignmentCenter;
+    label.textAlignment = NSTextAlignmentCenter;
     label.textColor = [UIColor whiteColor];
     label.backgroundColor = [UIColor clearColor];
     label.numberOfLines = 0;
-    label.lineBreakMode = UILineBreakModeWordWrap; 
+    label.lineBreakMode = NSLineBreakByCharWrapping;
     label.text = labelText;
     
     return label;

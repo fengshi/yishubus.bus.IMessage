@@ -90,6 +90,7 @@
 		8B1D0E1317575EDB00A17375 /* bar1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B1D0E1117575EDB00A17375 /* bar1@2x.png */; };
 		8B1D0E1717584DC500A17375 /* IMSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1D0E1517584DC500A17375 /* IMSettingViewController.m */; };
 		8B1D0E1817584DC500A17375 /* IMSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B1D0E1617584DC500A17375 /* IMSettingViewController.xib */; };
+		8B9446AC175C71FB00171B35 /* DejalActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9446AB175C71FB00171B35 /* DejalActivityView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -247,6 +248,8 @@
 		8B1D0E1417584DC500A17375 /* IMSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMSettingViewController.h; sourceTree = "<group>"; };
 		8B1D0E1517584DC500A17375 /* IMSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMSettingViewController.m; sourceTree = "<group>"; };
 		8B1D0E1617584DC500A17375 /* IMSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IMSettingViewController.xib; sourceTree = "<group>"; };
+		8B9446AA175C71FB00171B35 /* DejalActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DejalActivityView.h; sourceTree = "<group>"; };
+		8B9446AB175C71FB00171B35 /* DejalActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DejalActivityView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -659,6 +662,8 @@
 		8B1D0DEE1757570F00A17375 /* util */ = {
 			isa = PBXGroup;
 			children = (
+				8B9446AA175C71FB00171B35 /* DejalActivityView.h */,
+				8B9446AB175C71FB00171B35 /* DejalActivityView.m */,
 				8B1D0DEF1757574400A17375 /* RequestURL.h */,
 				8B1D0DF01757574400A17375 /* RequestURL.m */,
 				8B1D0DF4175757CB00A17375 /* Constants.h */,
@@ -796,6 +801,7 @@
 				8B1D0E0817575A8700A17375 /* ShowMessageViewController.m in Sources */,
 				8B1D0E0E17575BAB00A17375 /* IMAddressBookController.m in Sources */,
 				8B1D0E1717584DC500A17375 /* IMSettingViewController.m in Sources */,
+				8B9446AC175C71FB00171B35 /* DejalActivityView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

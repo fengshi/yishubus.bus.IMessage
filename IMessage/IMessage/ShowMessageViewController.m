@@ -9,6 +9,9 @@
 #import "ShowMessageViewController.h"
 
 @interface ShowMessageViewController ()
+{
+    NSArray *result;
+}
 
 @end
 
@@ -29,6 +32,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     CLLocationManager *location = [[CLLocationManager alloc] init];
     location.distanceFilter = 500.0f;
     location.desiredAccuracy = kCLLocationAccuracyHundredMeters;
