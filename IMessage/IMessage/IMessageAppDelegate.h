@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SqliteData.h"
 
 @interface IMessageAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
+@property (strong, nonatomic) SqliteData *sqlite;
 @end

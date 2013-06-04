@@ -37,7 +37,7 @@
     #warning TODO: 加载ShowMessageViewController内容列表,然后传给View,之后再解除Loading状态。
         NSArray *array = [[NSArray alloc] initWithObjects:@"aa", nil];
         dispatch_async(dispatch_get_main_queue(), ^{
-            if (array.count > 2) {
+            if (array.count > 0) {
                 self.tabBarController = [[UITabBarController alloc] init];
                 [self.tabBarController.view setFrame:self.view.bounds];
                 

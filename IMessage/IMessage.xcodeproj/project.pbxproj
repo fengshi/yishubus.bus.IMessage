@@ -91,6 +91,7 @@
 		8B1D0E1717584DC500A17375 /* IMSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1D0E1517584DC500A17375 /* IMSettingViewController.m */; };
 		8B1D0E1817584DC500A17375 /* IMSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B1D0E1617584DC500A17375 /* IMSettingViewController.xib */; };
 		8B9446AC175C71FB00171B35 /* DejalActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9446AB175C71FB00171B35 /* DejalActivityView.m */; };
+		8B9446AF175D8FFA00171B35 /* SqliteData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9446AE175D8FFA00171B35 /* SqliteData.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -250,6 +251,8 @@
 		8B1D0E1617584DC500A17375 /* IMSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IMSettingViewController.xib; sourceTree = "<group>"; };
 		8B9446AA175C71FB00171B35 /* DejalActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DejalActivityView.h; sourceTree = "<group>"; };
 		8B9446AB175C71FB00171B35 /* DejalActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DejalActivityView.m; sourceTree = "<group>"; };
+		8B9446AD175D8FFA00171B35 /* SqliteData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SqliteData.h; sourceTree = "<group>"; };
+		8B9446AE175D8FFA00171B35 /* SqliteData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SqliteData.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -646,6 +649,8 @@
 				8B1D0DF91757583B00A17375 /* NetWorkData.m */,
 				8B1D0DFB1757588800A17375 /* IMessageService.h */,
 				8B1D0DFC1757588800A17375 /* IMessageService.m */,
+				8B9446AD175D8FFA00171B35 /* SqliteData.h */,
+				8B9446AE175D8FFA00171B35 /* SqliteData.m */,
 			);
 			name = service;
 			sourceTree = "<group>";
@@ -802,6 +807,7 @@
 				8B1D0E0E17575BAB00A17375 /* IMAddressBookController.m in Sources */,
 				8B1D0E1717584DC500A17375 /* IMSettingViewController.m in Sources */,
 				8B9446AC175C71FB00171B35 /* DejalActivityView.m in Sources */,
+				8B9446AF175D8FFA00171B35 /* SqliteData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

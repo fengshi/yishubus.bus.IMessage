@@ -15,5 +15,6 @@
 @synthesize label = _label;
 @synthesize head = _head;
 @synthesize area = _area;
+@synthesize userId = _userId;
 
 @end
