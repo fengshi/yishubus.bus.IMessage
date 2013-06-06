@@ -18,5 +18,6 @@
 @synthesize userId = _userId;
 @synthesize sex = _sex;
 @synthesize info = _info;
+@synthesize school = _school;
 
 @end

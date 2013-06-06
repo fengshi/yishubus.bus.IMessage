@@ -11,6 +11,7 @@
 #import "ASIHTTPRequest.h"
 #import "Constants.h"
 #import "FindLevel.h"
+#import "AddressBook.h"
 
 @implementation NetWorkData
 
@@ -31,8 +32,8 @@
         if ([code isEqualToString:@"ok"]) {
             NSString *nickName = [resultDictionary objectForKey:@"nickName"];
             NSString *nid = [resultDictionary objectForKey:@"id"];
-            [nid stringByAppendingString:OPEN_FILE_SERVER];
-            NSLog(@"%@",nid);
+//            [nid stringByAppendingString:OPEN_FILE_SERVER];
+
             NSString *type = [resultDictionary objectForKey:@"type"];
             NSString *photo = [resultDictionary objectForKey:@"photo"];
             
@@ -104,6 +105,26 @@
         NSArray *resultArray = [jsonResult objectFromJSONString];
         if ([resultArray count] > 0) {
             NSMutableArray *result = [[NSMutableArray alloc] init];
+            for (int i=0; i<[resultArray count]; i++) {
+                NSDictionary *dictionary = [resultArray objectAtIndex:i];
+                NSString *nid = [dictionary objectForKey:@"id"];
+
+                NSString *sex = [dictionary objectForKey:@"sex"];
+                UIImage *headPhoto = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[dictionary objectForKey:@"photo"]]]];
+                NSString *nickName = [dictionary objectForKey:@"nickName"];
+                NSString *code = [dictionary objectForKey:@"email"];
+                NSString *school = [dictionary objectForKey:@"infotxt"];
+                
+                AddressBook *teacher = [[AddressBook alloc] init];
+                teacher.userId = nid;
+                teacher.sex = sex;
+                teacher.name = nickName;
+                teacher.code = code;
+                teacher.school = school;
+                teacher.head = headPhoto;
+                
+                [result addObject:teacher];
+            }
             return result;
         }
     }
