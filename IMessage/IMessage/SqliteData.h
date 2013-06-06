@@ -18,5 +18,6 @@
 
 - (BOOL) open;
 - (void) close;
+- (void) removeSqlite;
 
 @end

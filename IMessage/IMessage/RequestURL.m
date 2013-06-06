@@ -16,6 +16,10 @@
     switch (key) {
         case LOGIN_URL:
             return [ACTION_MAIN stringByAppendingString:@"websitMoblieAction.do?action=login"];
+        case LEVEL_URL:
+            return [ACTION_MAIN stringByAppendingString:@"websitMoblieAction.do?action=level"];
+        case TEACHER_URL:
+            return [ACTION_MAIN stringByAppendingString:@"websitMoblieAction.do?action=find"];
         default:
             break;
     }

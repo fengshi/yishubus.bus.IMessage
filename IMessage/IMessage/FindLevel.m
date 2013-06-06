@@ -9,5 +9,8 @@
 #import "FindLevel.h"
 
 @implementation FindLevel
+@synthesize lid = _lid;
+@synthesize lName = _lName;
+@synthesize detailLevel = _detailLevel;
 
 @end

@@ -7,9 +7,17 @@
 //
 
 #import "FindLevelViewController.h"
+#import "NetWorkData.h"
+#import "RequestURL.h"
+#import "Constants.h"
+#import "FindLevel.h"
+#import "FindLevelDetailViewController.h"
 
 @interface FindLevelViewController ()
-
+{
+    NSMutableArray *result;
+    BOOL isLoading;
+}
 @end
 
 @implementation FindLevelViewController
@@ -18,7 +26,10 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-        // Custom initialization
+        self.navigationItem.title = @"找老师";
+        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"找老师" image:nil tag:0];
+        [item setFinishedSelectedImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"bar1" ofType:@"png"]] withFinishedUnselectedImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"bar1" ofType:@"png"]]];
+        self.tabBarItem = item;
     }
     return self;
 }
@@ -26,12 +37,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    isLoading = NO;
+    NSString *url = [RequestURL getUrlByKey:LEVEL_URL];
+    result = [NetWorkData loginLevel:url];
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,16 +52,12 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    return [result count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -63,62 +67,53 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
-    // Configure the cell...
-    
+    FindLevel *level = [result objectAtIndex:indexPath.row];
+    cell.textLabel.text = level.lName;
     return cell;
 }
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    FindLevel *level = [result objectAtIndex:indexPath.row];
+    FindLevelDetailViewController *detailController = [[FindLevelDetailViewController alloc] init];
+    [detailController setArray:level.detailLevel];
+    [self.navigationController pushViewController:detailController animated:YES];
+}
+
+- (void) scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGPoint offset = scrollView.contentOffset;
+    CGRect bounds = scrollView.bounds;
+    CGSize size = scrollView.contentSize;
+    UIEdgeInsets inset = scrollView.contentInset;
+    
+    float y = offset.y + bounds.size.height - inset.bottom;
+    float h = size.height;
+    
+    NSLog(@"pos: %f of %f",y,h);
+    
+    float reload_distance = 10;
+    if (y > h + reload_distance) {
+        if (!isLoading) {
+            isLoading = YES;
+            for (int i=0; i<30; i++) {
+                FindLevel *level = [[FindLevel alloc] init];
+                level.lid = [NSString stringWithFormat:@"%d",i];
+                level.lName = [NSString stringWithFormat:@"%d",i];
+                [result addObject:level];
+            }
+            [self.tableView reloadData];
+            isLoading = NO;
+        }
+    }
+    
+    if (offset.y < 0) {
+        NSLog(@"小了小了");
+    }
 }
 
 @end

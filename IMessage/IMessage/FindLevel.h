@@ -10,4 +10,8 @@
 
 @interface FindLevel : NSObject
 
+@property (nonatomic, strong) NSString *lid;
+@property (nonatomic, strong) NSString *lName;
+@property (nonatomic, strong) NSMutableArray *detailLevel;
+
 @end

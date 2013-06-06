@@ -15,9 +15,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-
-    self.sqlite = [[SqliteData alloc] init];
-    [self.sqlite open];
     
     NSString *login = [[NSUserDefaults standardUserDefaults] objectForKey:@"mail"];
     login = @"abc";
@@ -59,7 +56,7 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    [self.sqlite close];
+
 }
 
 @end

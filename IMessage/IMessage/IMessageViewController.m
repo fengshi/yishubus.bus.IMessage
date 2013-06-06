@@ -12,6 +12,7 @@
 #import "IMSettingViewController.h"
 #import "DejalActivityView.h"
 #import "IMessageAppDelegate.h"
+#import "FindLevelViewController.h"
 
 @interface IMessageViewController ()
 
@@ -49,11 +50,15 @@
                 UINavigationController *bookNav = [[UINavigationController alloc] initWithRootViewController:bookController];
                 bookNav.navigationBar.tintColor = [UIColor colorWithRed:50/255.0 green:50/255.0 blue:50/255.0 alpha:0];
                 
+                FindLevelViewController *levelController = [[FindLevelViewController alloc] init];
+                UINavigationController *levelNav = [[UINavigationController alloc] initWithRootViewController:levelController];
+                levelNav.navigationBar.tintColor = [UIColor colorWithRed:50/255.0 green:50/255.0 blue:50/255.0 alpha:0];
+                
                 IMSettingViewController *settingController = [[IMSettingViewController alloc] initWithNibName:@"IMSettingViewController" bundle:nil];
                 UINavigationController *settingNav = [[UINavigationController alloc] initWithRootViewController:settingController];
                 settingNav.navigationBar.tintColor = [UIColor colorWithRed:50/255.0 green:50/255.0 blue:50/255.0 alpha:0];
                 
-                self.tabBarController.viewControllers = [NSArray arrayWithObjects:messageNav,bookNav,settingNav, nil];
+                self.tabBarController.viewControllers = [NSArray arrayWithObjects:messageNav,bookNav,levelNav,settingNav, nil];
                 
                 [self.view addSubview:self.tabBarController.view];
                 [DejalBezelActivityView removeViewAnimated:YES];

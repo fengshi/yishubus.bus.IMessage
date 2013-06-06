@@ -16,5 +16,7 @@
 @synthesize head = _head;
 @synthesize area = _area;
 @synthesize userId = _userId;
+@synthesize sex = _sex;
+@synthesize info = _info;
 
 @end

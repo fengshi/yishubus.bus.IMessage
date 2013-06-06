@@ -11,5 +11,7 @@
 @interface NetWorkData : NSObject
 
 + (BOOL) loginData:(NSString *)url email:(NSString *)mail password:(NSString *)pass;
++ (NSMutableArray *) loginLevel: (NSString *)dataUrl;
++ (NSMutableArray *) searchTeacher:(NSString *)dataUrl page:(NSString *)page lt:(NSString *)lt lid:(NSString *)lid;
 
 @end

@@ -11,12 +11,14 @@
 
 @interface AddressBook : NSObject
 
-@property (nonatomic, strong, readonly) NSString *code;  // -- 用户名
-@property (nonatomic, strong, readonly) NSString *name;  // -- 妮称
-@property (nonatomic, readonly) NSUserType type;         // -- 用户类型(教师,用户)
-@property (nonatomic, strong, readonly) NSString *label; // -- 艺术种类,如钢琴,小提琴 (只有教师有此内容)
-@property (nonatomic, strong, readonly) UIImage *head;   // -- 头像
-@property (nonatomic, strong, readonly) NSString *area;  // -- 地区
-@property (nonatomic, strong, readonly) NSString *userId;// -- openfire用户名(组合好的)
+@property (nonatomic, strong) NSString *code;  // -- 用户名
+@property (nonatomic, strong) NSString *name;  // -- 妮称
+@property (nonatomic) NSUserType type;         // -- 用户类型(教师,用户)
+@property (nonatomic, strong) NSString *label; // -- 艺术种类,如钢琴,小提琴 (只有教师有此内容)
+@property (nonatomic, strong) UIImage *head;   // -- 头像
+@property (nonatomic, strong) NSString *area;  // -- 地区
+@property (nonatomic, strong) NSString *userId;// -- openfire用户名(组合好的)
+@property (nonatomic, strong) NSString *sex;   // -- 性别
+@property (nonatomic, strong) NSString *info;  // -- 简介
 
 @end

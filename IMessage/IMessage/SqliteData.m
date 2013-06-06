@@ -15,7 +15,7 @@
 
 - (NSString *)dbFilePath
 {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES);
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     
     return [documentsDirectory stringByAppendingPathComponent:DB_NAME];
@@ -53,11 +53,13 @@
 
 - (void) removeSqlite
 {
+    if ([self open]) {
+        [self close];
+    }
     NSString *filePath = [self dbFilePath];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     BOOL find = [fileManager fileExistsAtPath:filePath];
     if (find) {
-        NSLog(@"数据库存在");
         [fileManager removeItemAtPath:filePath error:nil];
     } else {
         NSLog(@"数据库不存在");

@@ -10,4 +10,5 @@
 
 @interface FindLevelDetailViewController : UITableViewController
 
+@property (nonatomic, strong) NSMutableArray *array;
 @end
