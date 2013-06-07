@@ -7,6 +7,7 @@
 //
 
 #import "TeacherViewCellController.h"
+#import "AddressBook.h"
 
 @implementation TeacherViewCellController
 
@@ -26,4 +27,10 @@
     // Configure the view for the selected state
 }
 
+- (void) initDraw:(AddressBook *)teacher
+{
+    self.headView.image = teacher.head;
+    self.name.text = teacher.name;
+    self.school.text = teacher.school;
+}
 @end

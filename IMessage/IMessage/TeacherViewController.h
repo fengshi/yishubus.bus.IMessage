@@ -10,4 +10,6 @@
 
 @interface TeacherViewController : UITableViewController
 
+- (void)initLid:(NSString *)lid lName:(NSString *)name;
+
 @end

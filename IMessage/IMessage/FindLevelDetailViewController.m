@@ -8,9 +8,12 @@
 
 #import "FindLevelDetailViewController.h"
 #import "FindLevel.h"
+#import "TeacherViewController.h"
 
 @interface FindLevelDetailViewController ()
-
+{
+    NSMutableArray *array;
+}
 @end
 
 @implementation FindLevelDetailViewController
@@ -24,16 +27,17 @@
     return self;
 }
 
-- (void) setArray:(NSMutableArray *)array
+- (void) initData:(NSMutableArray *)data titleName:(NSString *)name
 {
-    self.array = array;
+    array = data;
+    self.navigationItem.title = name;
     [self.tableView reloadData];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.array = [[NSMutableArray alloc] init];
+//    array = [[NSMutableArray alloc] init];
 }
 
 - (void)didReceiveMemoryWarning
@@ -51,7 +55,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.array count];
+    return [array count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -61,7 +65,7 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    FindLevel *detailLevel = [self.array objectAtIndex:indexPath.row];
+    FindLevel *detailLevel = [array objectAtIndex:indexPath.row];
     cell.textLabel.text = detailLevel.lName;
     return cell;
 }
@@ -70,13 +74,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    FindLevel *level = [array objectAtIndex:indexPath.row];
+    TeacherViewController *teacher = [[TeacherViewController alloc] init];
+    [teacher initLid:level.lid lName:level.lName];
+    [self.navigationController pushViewController:teacher animated:YES];
 }
 
 @end

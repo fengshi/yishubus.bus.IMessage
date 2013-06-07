@@ -7,9 +7,21 @@
 //
 
 #import "TeacherViewController.h"
+#import "RequestURL.h"
+#import "Constants.h"
+#import "NetWorkData.h"
+#import "DejalActivityView.h"
+#import "IMessageAppDelegate.h"
+#import "AddressBook.h"
+#import "TeacherViewCellController.h"
 
 @interface TeacherViewController ()
-
+{
+    NSMutableArray *result;
+    NSInteger page;
+    BOOL isLoading;
+    NSString *lidString;
+}
 @end
 
 @implementation TeacherViewController
@@ -23,15 +35,50 @@
     return self;
 }
 
+- (void)initLid:(NSString *)lid lName:(NSString *)name
+{
+    lidString = lid;
+    self.navigationItem.title = [name stringByAppendingString:@"老师"];
+    
+    [self loadData];
+}
+
+- (void) turnPage: (NSString *) lid
+{
+    if (!isLoading) {
+        isLoading = YES;
+        page = page + 1;
+        
+        [DejalBezelActivityView activityViewForView:[self appDelegate].window];
+        dispatch_queue_t queue = dispatch_queue_create("act", nil);
+        dispatch_async(queue, ^{
+            NSString *stringUrl = [RequestURL getUrlByKey:TEACHER_URL];
+            NSMutableArray *data = [NetWorkData searchTeacher:stringUrl page:[NSString stringWithFormat:@"%d",page] lt:@"2" lid:lid];
+            if ([data count] > 0) {
+                for (int i=0; i<[data count]; i++) {
+                    [result addObject:[data objectAtIndex:i]];
+                }
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.tableView reloadData];
+                isLoading = NO;
+                [DejalBezelActivityView removeView];
+            });
+        });
+    }
+}
+
+- (void) loadData
+{
+    page = 0;
+    isLoading = NO;
+    result = [[NSMutableArray alloc] init];
+    [self turnPage:lidString];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,66 +91,32 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    return [result count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    static NSString *CellIdentifier = @"tcell";
+    UINib *nib = [UINib nibWithNibName:@"TeacherViewCellController" bundle:nil];
+    [tableView registerNib:nib forCellReuseIdentifier:CellIdentifier];
     
-    // Configure the cell...
+    TeacherViewCellController *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
+    AddressBook *teacher = [result objectAtIndex:indexPath.row];
+    [cell initDraw:teacher];
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+    return cell.frame.size.height;
 }
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
@@ -118,4 +131,24 @@
      */
 }
 
+- (IMessageAppDelegate *)appDelegate
+{
+    return (IMessageAppDelegate *)[[UIApplication sharedApplication] delegate];
+}
+
+- (void) scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGPoint offset = scrollView.contentOffset;
+    CGRect bounds = scrollView.bounds;
+    CGSize size = scrollView.contentSize;
+    UIEdgeInsets inset = scrollView.contentInset;
+    
+    float y = offset.y + bounds.size.height - inset.bottom;
+    float h = size.height;
+    
+    float reload_distance = 10;
+    if (y > h + reload_distance) {
+        [self turnPage:lidString];
+    }
+}
 @end

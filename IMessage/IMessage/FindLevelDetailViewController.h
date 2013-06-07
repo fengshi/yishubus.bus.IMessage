@@ -10,5 +10,5 @@
 
 @interface FindLevelDetailViewController : UITableViewController
 
-@property (nonatomic, strong) NSMutableArray *array;
+- (void) initData:(NSMutableArray *)data titleName:(NSString *)name;
 @end

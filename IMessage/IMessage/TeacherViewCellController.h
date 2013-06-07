@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class AddressBook;
 @interface TeacherViewCellController : UITableViewCell
 
+@property (strong, nonatomic) IBOutlet UIImageView *headView;
+@property (nonatomic, strong) IBOutlet UILabel *name;
+@property (nonatomic, strong) IBOutlet UILabel *school;
+
+- (void) initDraw:(AddressBook *)teacher;
 @end

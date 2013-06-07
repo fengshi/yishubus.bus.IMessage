@@ -97,6 +97,10 @@
 		8B9446B71760670A00171B35 /* FindLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9446B61760670A00171B35 /* FindLevel.m */; };
 		8B9446BA17606FBC00171B35 /* FindLevelDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9446B917606FBC00171B35 /* FindLevelDetailViewController.m */; };
 		8B9446BC17606FDF00171B35 /* FindLevelDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B9446BB17606FDE00171B35 /* FindLevelDetailViewController.xib */; };
+		8B9446BF1761A6B300171B35 /* TeacherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9446BE1761A6B300171B35 /* TeacherViewController.m */; };
+		8B9446C11761A6F700171B35 /* TeacherViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B9446C01761A6F700171B35 /* TeacherViewController.xib */; };
+		8BA3442D1761BB5C00DC0E53 /* TeacherViewCellController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BA3442C1761BB5C00DC0E53 /* TeacherViewCellController.m */; };
+		8BA3442F1761BBA900DC0E53 /* TeacherViewCellController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BA3442E1761BBA900DC0E53 /* TeacherViewCellController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -266,6 +270,12 @@
 		8B9446B817606FBC00171B35 /* FindLevelDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindLevelDetailViewController.h; sourceTree = "<group>"; };
 		8B9446B917606FBC00171B35 /* FindLevelDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindLevelDetailViewController.m; sourceTree = "<group>"; };
 		8B9446BB17606FDE00171B35 /* FindLevelDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FindLevelDetailViewController.xib; sourceTree = "<group>"; };
+		8B9446BD1761A6B200171B35 /* TeacherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeacherViewController.h; sourceTree = "<group>"; };
+		8B9446BE1761A6B300171B35 /* TeacherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeacherViewController.m; sourceTree = "<group>"; };
+		8B9446C01761A6F700171B35 /* TeacherViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeacherViewController.xib; sourceTree = "<group>"; };
+		8BA3442B1761BB5C00DC0E53 /* TeacherViewCellController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeacherViewCellController.h; sourceTree = "<group>"; };
+		8BA3442C1761BB5C00DC0E53 /* TeacherViewCellController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeacherViewCellController.m; sourceTree = "<group>"; };
+		8BA3442E1761BBA900DC0E53 /* TeacherViewCellController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeacherViewCellController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -368,6 +378,12 @@
 				8B9446B817606FBC00171B35 /* FindLevelDetailViewController.h */,
 				8B9446B917606FBC00171B35 /* FindLevelDetailViewController.m */,
 				8B9446BB17606FDE00171B35 /* FindLevelDetailViewController.xib */,
+				8B9446BD1761A6B200171B35 /* TeacherViewController.h */,
+				8B9446BE1761A6B300171B35 /* TeacherViewController.m */,
+				8B9446C01761A6F700171B35 /* TeacherViewController.xib */,
+				8BA3442B1761BB5C00DC0E53 /* TeacherViewCellController.h */,
+				8BA3442C1761BB5C00DC0E53 /* TeacherViewCellController.m */,
+				8BA3442E1761BBA900DC0E53 /* TeacherViewCellController.xib */,
 			);
 			path = IMessage;
 			sourceTree = "<group>";
@@ -763,6 +779,8 @@
 				8B1D0E1817584DC500A17375 /* IMSettingViewController.xib in Resources */,
 				8B9446B41760635900171B35 /* FindLevelViewController.xib in Resources */,
 				8B9446BC17606FDF00171B35 /* FindLevelDetailViewController.xib in Resources */,
+				8B9446C11761A6F700171B35 /* TeacherViewController.xib in Resources */,
+				8BA3442F1761BBA900DC0E53 /* TeacherViewCellController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -834,6 +852,8 @@
 				8B9446B31760635900171B35 /* FindLevelViewController.m in Sources */,
 				8B9446B71760670A00171B35 /* FindLevel.m in Sources */,
 				8B9446BA17606FBC00171B35 /* FindLevelDetailViewController.m in Sources */,
+				8B9446BF1761A6B300171B35 /* TeacherViewController.m in Sources */,
+				8BA3442D1761BB5C00DC0E53 /* TeacherViewCellController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

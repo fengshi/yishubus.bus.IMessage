@@ -80,40 +80,8 @@
 {
     FindLevel *level = [result objectAtIndex:indexPath.row];
     FindLevelDetailViewController *detailController = [[FindLevelDetailViewController alloc] init];
-    [detailController setArray:level.detailLevel];
+    [detailController initData:level.detailLevel titleName:level.lName];
     [self.navigationController pushViewController:detailController animated:YES];
-}
-
-- (void) scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    CGPoint offset = scrollView.contentOffset;
-    CGRect bounds = scrollView.bounds;
-    CGSize size = scrollView.contentSize;
-    UIEdgeInsets inset = scrollView.contentInset;
-    
-    float y = offset.y + bounds.size.height - inset.bottom;
-    float h = size.height;
-    
-    NSLog(@"pos: %f of %f",y,h);
-    
-    float reload_distance = 10;
-    if (y > h + reload_distance) {
-        if (!isLoading) {
-            isLoading = YES;
-            for (int i=0; i<30; i++) {
-                FindLevel *level = [[FindLevel alloc] init];
-                level.lid = [NSString stringWithFormat:@"%d",i];
-                level.lName = [NSString stringWithFormat:@"%d",i];
-                [result addObject:level];
-            }
-            [self.tableView reloadData];
-            isLoading = NO;
-        }
-    }
-    
-    if (offset.y < 0) {
-        NSLog(@"小了小了");
-    }
 }
 
 @end
