@@ -130,4 +130,53 @@
     }
     return nil;
 }
+
++ (AddressBook *) userDetail:(NSString *)dataUrl userId:(NSString *)uid
+{
+    NSString *stringUrl = [NSString stringWithFormat:@"&id=%@",uid];
+    NSURL *url = [NSURL URLWithString:[dataUrl stringByAppendingString:stringUrl]];
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    [request startSynchronous];
+    AddressBook *book = [[AddressBook alloc]init];
+    NSError *error = [request error];
+    if (!error) {
+        NSString *jsonResult = [request responseString];
+        NSDictionary *dictionary = [jsonResult objectFromJSONString];
+        NSString *code = [dictionary objectForKey:@"email"];
+        UIImage *headPhoto = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[dictionary objectForKey:@"photo"]]]];
+        NSString *nickName = [dictionary objectForKey:@"nickName"];
+        NSString *l2Names = [dictionary objectForKey:@"l2Names"];
+        NSString *tutorWay = [dictionary objectForKey:@"tutorWay"];
+        NSString *eduArea = [dictionary objectForKey:@"eduArea"];
+        NSString *school = [dictionary objectForKey:@"school"];
+        NSString *info = [dictionary objectForKey:@"info"];
+        NSString *eduTag = [dictionary objectForKey:@"eduTag"];
+        NSArray *imageUrls = [dictionary objectForKey:@"urls"];
+        NSArray *awards = [dictionary objectForKey:@"awards"];
+        
+        book.userId = uid;
+        book.name = nickName;
+        book.code = code;
+        book.head = headPhoto;
+        book.label = l2Names;
+        book.tutorWay = tutorWay;
+        book.eduTag = eduTag;
+        book.area = eduArea;
+        book.school = school;
+        book.info = info;
+        book.awards = [[NSMutableArray alloc] initWithArray:awards];
+        
+        NSMutableArray *bookPics = [[NSMutableArray alloc] init];
+        
+        if (imageUrls.count > 0) {
+            for (int i=0; i<imageUrls.count; i++) {
+                NSString *ihttp = [imageUrls objectAtIndex:i];
+                UIImage *photo = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:ihttp]]];
+                [bookPics addObject:photo];
+            }
+        }
+        book.pics = bookPics;
+    }
+    return book;
+}
 @end

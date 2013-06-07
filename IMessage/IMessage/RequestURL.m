@@ -20,6 +20,8 @@
             return [ACTION_MAIN stringByAppendingString:@"websitMoblieAction.do?action=level"];
         case TEACHER_URL:
             return [ACTION_MAIN stringByAppendingString:@"websitMoblieAction.do?action=find"];
+        case USER_ADDR_NULL:
+            return [ACTION_MAIN stringByAppendingString:@"websitMoblieAction.do?action=getDetail"];
         default:
             break;
     }

@@ -19,5 +19,9 @@
 @synthesize sex = _sex;
 @synthesize info = _info;
 @synthesize school = _school;
+@synthesize tutorWay = _tutorWay;
+@synthesize pics = _pics;
+@synthesize awards = _awards;
+@synthesize eduTag = _eduTag;
 
 @end

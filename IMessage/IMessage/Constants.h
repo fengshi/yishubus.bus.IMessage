@@ -19,3 +19,4 @@ typedef enum _NSUserType
 #define LOGIN_URL        1
 #define LEVEL_URL        2
 #define TEACHER_URL      3
+#define USER_DETAIL_URL  4
