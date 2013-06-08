@@ -14,6 +14,7 @@ typedef enum _NSUserType
 
 #define OPEN_FILE_SERVER @"@yishubus-pc"
 #define ACTION_MAIN      @"http://192.168.0.107:7878/"
+#define XMPP_MAIN        @"192.168.0.107"
 #define DB_NAME          @"message.sqlite"
 
 #define LOGIN_URL        1

@@ -9,5 +9,13 @@
 #import "TalkMessage.h"
 
 @implementation TalkMessage
+@synthesize from = _from;
+@synthesize to = _to;
+@synthesize fromHeadImage = _fromHeadImage;
+@synthesize toHeadImage = _toHeadImage;
+@synthesize fromBack = _fromBack;
+@synthesize toBack = _toBack;
+@synthesize msg = _msg;
+@synthesize talkTime = _talkTime;
 
 @end

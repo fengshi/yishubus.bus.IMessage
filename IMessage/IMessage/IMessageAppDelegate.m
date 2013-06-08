@@ -9,15 +9,18 @@
 #import "IMessageAppDelegate.h"
 #import "IMessageViewController.h"
 #import "LoginViewController.h"
+#import "Constants.h"
+#import "IMessageService.h"
 
 @implementation IMessageAppDelegate
+@synthesize xmppStream;
+@synthesize messageReceiveDelegate;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     NSString *login = [[NSUserDefaults standardUserDefaults] objectForKey:@"mail"];
-    login = @"abc";
     
     if (!login) {
         LoginViewController *loginController = [[LoginViewController alloc] init];
@@ -56,7 +59,66 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-
+    [self disconnect];
 }
 
+- (void) setupStream
+{
+    xmppStream = [[XMPPStream alloc] init];
+    [xmppStream addDelegate:self delegateQueue:dispatch_get_main_queue()];
+    
+    [xmppStream setHostName:XMPP_MAIN];
+}
+
+- (BOOL) connect
+{
+    [self setupStream];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *userId = [defaults stringForKey:@"id"];
+    NSString *pass = [defaults stringForKey:@"pass"];
+
+    if (![xmppStream isDisconnected]) {
+        return YES;
+    }
+    
+    if (userId == nil || pass == nil) {
+        return NO;
+    }
+    
+    [xmppStream setMyJID:[XMPPJID jidWithString:[userId stringByAppendingString:OPEN_FILE_SERVER]]];
+    
+    NSError *error = nil;
+    if (![xmppStream connectWithTimeout:XMPPStreamTimeoutNone error:&error]) {
+        return NO;
+    }
+    return YES;
+}
+
+- (void) disconnect
+{
+    isOpenStream = NO;
+    [xmppStream disconnect];
+}
+
+- (void) xmppStreamDidConnect: (XMPPStream *) sender
+{
+    isOpenStream = YES;
+    NSString *pass = [[NSUserDefaults standardUserDefaults] stringForKey:@"pass"];
+    NSError *error = nil;
+    [[self xmppStream] authenticateWithPassword:pass error:&error];
+}
+
+- (void) xmppStream: (XMPPStream *) sender didReceiveMessage:(XMPPMessage *)message
+{
+    NSString *msg = [[message elementForName:@"body"] stringValue];
+    NSString *from = [[message elementForName:@"from"] stringValue];
+    
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [dict setObject:msg forKey:@"msg"];
+    [dict setObject:from forKey:@"sender"];
+    [dict setObject:[IMessageService getCurrentTime] forKey:@"time"];
+    
+    // -- 消息委托
+    [messageReceiveDelegate messageReceive:dict];
+}
 @end

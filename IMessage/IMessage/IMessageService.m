@@ -33,4 +33,15 @@
     return yesorno;
 }
 
++ (NSString *) getCurrentTime
+{
+    NSDate *nowUTC = [NSDate date];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setTimeZone:[NSTimeZone localTimeZone]];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    [formatter setTimeStyle:NSDateFormatterMediumStyle];
+    
+    return [formatter stringFromDate:nowUTC];
+}
 @end

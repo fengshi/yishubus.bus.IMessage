@@ -12,7 +12,6 @@
 @implementation SqliteData
 @synthesize db = _db;
 
-
 - (NSString *)dbFilePath
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -37,7 +36,7 @@
 
 - (void) initCreateTable
 {
-    const char *createAddressBookSql = "create table if not exists addressbook (id integer primary key autoincrement,code text,name text,type int,label text,head text,area text,userid text)";
+    const char *createAddressBookSql = "create table if not exists addressbook (id integer primary key autoincrement,code text,name text,type integer,label text,head blob,area text,userid text,school text,info text,tutorway text,edutag text)";
     sqlite3_stmt *statement;
     if (sqlite3_prepare_v2(db, createAddressBookSql, -1, &statement, nil) != SQLITE_OK) {
         UIAlertView *showView = [[UIAlertView alloc] initWithTitle:@"初始化通讯录" message:@"解析建表语句失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
@@ -46,6 +45,18 @@
     
     if (sqlite3_step(statement) != SQLITE_DONE) {
         UIAlertView *showView = [[UIAlertView alloc] initWithTitle:@"初始化通讯录" message:@"建表失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [showView show];
+    }
+    sqlite3_finalize(statement);
+    
+    const char *createMessageSql = "create table if not exists message (id integer primary key autoincrement,fid text,tid text,msg text,talktime text,isload integer)";
+    if (sqlite3_prepare_v2(db, createMessageSql, -1, &statement, nil) != SQLITE_OK) {
+        UIAlertView *showView = [[UIAlertView alloc] initWithTitle:@"初始化聊天" message:@"解析建表语句失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [showView show];
+    }
+    
+    if (sqlite3_step(statement) != SQLITE_DONE) {
+        UIAlertView *showView = [[UIAlertView alloc] initWithTitle:@"初始化聊天" message:@"建表失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [showView show];
     }
     sqlite3_finalize(statement);

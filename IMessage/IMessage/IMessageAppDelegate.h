@@ -7,10 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SqliteData.h"
+#import "XMPP.h"
+#import "MessageReceiveDelegate.h"
 
 @interface IMessageAppDelegate : UIResponder <UIApplicationDelegate>
+{
+    XMPPStream *xmppStream;
+    BOOL isOpenStream;
+}
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) XMPPStream *xmppStream;
+@property (nonatomic, retain) id<MessageReceiveDelegate> messageReceiveDelegate;
+
+- (BOOL) connect;
+- (void) disconnect;
+- (void) setupStream;
 
 @end

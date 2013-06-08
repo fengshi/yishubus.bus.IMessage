@@ -7,7 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MessageReceiveDelegate.h"
 
-@interface TalkMessageViewController : UIViewController
+@interface TalkMessageViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,MessageReceiveDelegate>
+
+@property (strong, nonatomic) IBOutlet UITableView *tView;
+
+@property (strong, nonatomic) IBOutlet UITextField *textField;
+
+@property (nonatomic, retain) NSString *chatWithUser;
+
+- (IBAction)clickMessage:(id)sender;
 
 @end

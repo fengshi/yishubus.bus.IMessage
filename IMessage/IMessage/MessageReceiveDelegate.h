@@ -10,4 +10,6 @@
 
 @protocol MessageReceiveDelegate <NSObject>
 
+- (void) messageReceive:(NSDictionary *) messageContent;
+
 @end
