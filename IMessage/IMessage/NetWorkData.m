@@ -102,9 +102,12 @@
     NSError *error = [request error];
     if (!error) {
         NSString *jsonResult = [request responseString];
-        NSArray *resultArray = [jsonResult objectFromJSONString];
-        if ([resultArray count] > 0) {
+        NSDictionary *resultDirectionary = [jsonResult objectFromJSONString];
+        if (![[resultDirectionary objectForKey:@"totalPage"] isEqual:@"0"]) {
+            NSString *pageNumber = [resultDirectionary objectForKey:@"totalPage"];
             NSMutableArray *result = [[NSMutableArray alloc] init];
+            [result addObject:pageNumber];
+            NSArray *resultArray = [resultDirectionary objectForKey:@"items"];
             for (int i=0; i<[resultArray count]; i++) {
                 NSDictionary *dictionary = [resultArray objectAtIndex:i];
                 NSString *nid = [dictionary objectForKey:@"id"];

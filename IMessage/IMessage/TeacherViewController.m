@@ -22,6 +22,7 @@
     NSInteger page;
     BOOL isLoading;
     NSString *lidString;
+    NSInteger totalPage;
 }
 @end
 
@@ -49,29 +50,32 @@
     if (!isLoading) {
         isLoading = YES;
         page = page + 1;
-        
-        [DejalBezelActivityView activityViewForView:[self appDelegate].window];
-        dispatch_queue_t queue = dispatch_queue_create("act", nil);
-        dispatch_async(queue, ^{
-            NSString *stringUrl = [RequestURL getUrlByKey:TEACHER_URL];
-            NSMutableArray *data = [NetWorkData searchTeacher:stringUrl page:[NSString stringWithFormat:@"%d",page] lt:@"2" lid:lid];
-            if ([data count] > 0) {
-                for (int i=0; i<[data count]; i++) {
-                    [result addObject:[data objectAtIndex:i]];
+        if (page <= totalPage) {
+            [DejalBezelActivityView activityViewForView:[self appDelegate].window];
+            dispatch_queue_t queue = dispatch_queue_create("act", nil);
+            dispatch_async(queue, ^{
+                NSString *stringUrl = [RequestURL getUrlByKey:TEACHER_URL];
+                NSMutableArray *data = [NetWorkData searchTeacher:stringUrl page:[NSString stringWithFormat:@"%d",page] lt:@"2" lid:lid];
+                totalPage = [[data objectAtIndex:0] intValue];
+                if ([data count] > 0) {
+                    for (int i=1; i<[data count]; i++) {
+                        [result addObject:[data objectAtIndex:i]];
+                    }
                 }
-            }
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.tableView reloadData];
-                isLoading = NO;
-                [DejalBezelActivityView removeView];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.tableView reloadData];
+                    isLoading = NO;
+                    [DejalBezelActivityView removeView];
+                });
             });
-        });
+        }
     }
 }
 
 - (void) loadData
 {
     page = 0;
+    totalPage = 1;
     isLoading = NO;
     result = [[NSMutableArray alloc] init];
     [self turnPage:lidString];
