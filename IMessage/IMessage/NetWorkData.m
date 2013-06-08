@@ -17,7 +17,7 @@
 
 + (BOOL) loginData:(NSString *)url email:(NSString *)mail password:(NSString *)pass
 {
-    NSString *stringUrl = [NSString stringWithFormat:@"&email=%@&password=%@",mail,pass];
+    NSString *stringUrl = [NSString stringWithFormat:@"&email=%@&password=%@&appName=%@",mail,pass,@"iPhone"];
     
     NSURL *netUrl = [NSURL URLWithString:[url stringByAppendingString:stringUrl]];
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:netUrl];
