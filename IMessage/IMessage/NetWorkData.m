@@ -133,7 +133,7 @@
 
 + (AddressBook *) userDetail:(NSString *)dataUrl userId:(NSString *)uid
 {
-    NSString *stringUrl = [NSString stringWithFormat:@"&id=%@",uid];
+    NSString *stringUrl = [NSString stringWithFormat:@"&id=%d",[uid intValue]];
     NSURL *url = [NSURL URLWithString:[dataUrl stringByAppendingString:stringUrl]];
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
     [request startSynchronous];
@@ -170,8 +170,8 @@
         
         if (imageUrls.count > 0) {
             for (int i=0; i<imageUrls.count; i++) {
-                NSString *ihttp = [imageUrls objectAtIndex:i];
-                UIImage *photo = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:ihttp]]];
+                NSDictionary *ihttp = [imageUrls objectAtIndex:i];
+                UIImage *photo = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[ihttp objectForKey:@"url"]]]];
                 [bookPics addObject:photo];
             }
         }

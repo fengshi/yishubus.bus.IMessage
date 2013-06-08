@@ -13,7 +13,7 @@ typedef enum _NSUserType
 } NSUserType;
 
 #define OPEN_FILE_SERVER @"@yishubus-pc"
-#define ACTION_MAIN      @"http://192.168.0.104:7878/"
+#define ACTION_MAIN      @"http://192.168.0.107:7878/"
 #define DB_NAME          @"message.sqlite"
 
 #define LOGIN_URL        1

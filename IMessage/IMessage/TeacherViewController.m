@@ -14,6 +14,7 @@
 #import "IMessageAppDelegate.h"
 #import "AddressBook.h"
 #import "TeacherViewCellController.h"
+#import "TeacherDetailViewController.h"
 
 @interface TeacherViewController ()
 {
@@ -122,13 +123,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    
+    AddressBook *teacher = [result objectAtIndex:indexPath.row];
+    TeacherDetailViewController *teacherDetail = [[TeacherDetailViewController alloc] init];
+    [teacherDetail initDraw:teacher.userId];
+    
+    [self.navigationController pushViewController:teacherDetail animated:YES];
 }
 
 - (IMessageAppDelegate *)appDelegate

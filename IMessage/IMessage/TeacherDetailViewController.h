@@ -10,4 +10,22 @@
 
 @interface TeacherDetailViewController : UIViewController
 
+@property (strong, nonatomic) IBOutlet UIImageView *headView;
+
+@property (strong, nonatomic) IBOutlet UILabel *name;
+
+@property (strong, nonatomic) IBOutlet UILabel *school;
+
+@property (strong, nonatomic) IBOutlet UILabel *typeLabel;
+
+@property (strong, nonatomic) IBOutlet UILabel *tutorWay;
+
+@property (strong, nonatomic) IBOutlet UILabel *area;
+
+@property (strong, nonatomic) IBOutlet UILabel *info;
+
+
+- (IBAction)sendMessage:(id)sender;
+
+- (void) initDraw: (NSString *)uid;
 @end
