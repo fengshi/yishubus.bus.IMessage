@@ -13,6 +13,7 @@
 #import "DejalActivityView.h"
 #import "IMessageAppDelegate.h"
 #import "FindLevelViewController.h"
+#import "SqliteData.h"
 
 @interface IMessageViewController ()
 
@@ -32,6 +33,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    SqliteData *data = [[SqliteData alloc]init];
+    
+    BOOL bb = [data isFriend:@"1"];
+    NSLog(@"%@",bb?@"YES":@"NO");
+    
     [DejalBezelActivityView activityViewForView:[self appDelegate].window];    
     dispatch_queue_t queue = dispatch_queue_create("act", nil);
     dispatch_async(queue, ^{

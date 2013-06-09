@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <sqlite3.h>
 
+@class AddressBook;
 @interface SqliteData : NSObject
 {
     sqlite3 *db;
@@ -19,5 +20,7 @@
 - (BOOL) open;
 - (void) close;
 - (void) removeSqlite;
+- (BOOL) isFriend:(NSString *)uid;
+- (BOOL) addFriend:(AddressBook *) friendBook;
 
 @end

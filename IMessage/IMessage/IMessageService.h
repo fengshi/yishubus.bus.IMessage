@@ -13,5 +13,4 @@
 + (NSString *) getCurrentTime;
 - (void) removeLoginMessage;
 - (BOOL) isLogin:(NSString *)email password:(NSString *)pass;
-
 @end
