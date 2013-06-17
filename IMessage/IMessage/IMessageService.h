@@ -11,6 +11,8 @@
 @interface IMessageService : NSObject
 
 + (NSString *) getCurrentTime;
++ (NSString *) getWeek;
 - (void) removeLoginMessage;
 - (BOOL) isLogin:(NSString *)email password:(NSString *)pass;
+- (NSMutableArray *) showMessageInitLoadFriends;
 @end

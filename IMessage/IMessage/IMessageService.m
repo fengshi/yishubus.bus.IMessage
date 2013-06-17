@@ -10,6 +10,8 @@
 #import "NetWorkData.h"
 #import "RequestURL.h"
 #import "Constants.h"
+#import "SqliteData.h"
+#import "AddressBook.h"
 
 @implementation IMessageService
 
@@ -38,10 +40,37 @@
     NSDate *nowUTC = [NSDate date];
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setTimeZone:[NSTimeZone localTimeZone]];
-    [formatter setDateStyle:NSDateFormatterMediumStyle];
-    [formatter setTimeStyle:NSDateFormatterMediumStyle];
+//    [formatter setTimeZone:[NSTimeZone localTimeZone]];
+//    [formatter setDateStyle:NSDateFormatterMediumStyle];
+//    [formatter setTimeStyle:NSDateFormatterMediumStyle];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+//    [formatter setDateFormat:@"yyyy年MM月dd日#EEEE"]; // EEEE为星期几,EEE为周几
+//    [formatter setDateFormat:@"yyyy年MMMMd日"]; // MMMM为XX月,d可以省去01日前的0
     
     return [formatter stringFromDate:nowUTC];
+}
+
++ (NSString *) getWeek
+{
+    NSDate *nowUTC = [NSDate date];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"#EEEE"];
+    
+    return [formatter stringFromDate:nowUTC];
+}
+
+- (NSMutableArray *) showMessageInitLoadFriends
+{
+    SqliteData *util = [[SqliteData alloc] init];
+    NSMutableArray *array = [util bookMessage];
+    for (int i = 0; i < array.count; i++) {
+        NSMutableDictionary *directionary = [array objectAtIndex:i];
+        NSString *userid = [directionary objectForKey:@"userid"];
+        AddressBook *book = [util getFriend:userid];
+        [directionary setObject:book.head forKey:@"head"];
+        [directionary setObject:book.name forKey:@"name"];
+    }
+    return array;
 }
 @end

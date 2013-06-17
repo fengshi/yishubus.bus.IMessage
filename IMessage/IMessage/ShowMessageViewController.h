@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 
-@interface ShowMessageViewController : UIViewController<CLLocationManagerDelegate>
+@interface ShowMessageViewController : UIViewController<CLLocationManagerDelegate,UITableViewDataSource,UITableViewDelegate>
+
+@property (strong, nonatomic) IBOutlet UITableView *tView;
+- (void) initDraw: (NSMutableArray *) array;
 
 @end

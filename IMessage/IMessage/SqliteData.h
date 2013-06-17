@@ -22,5 +22,7 @@
 - (void) removeSqlite;
 - (BOOL) isFriend:(NSString *)uid;
 - (BOOL) addFriend:(AddressBook *) friendBook;
+- (NSMutableArray *) bookMessage;
+- (AddressBook *) getFriend:(NSString *)uid;
 
 @end

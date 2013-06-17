@@ -13,6 +13,7 @@
 #import "RequestURL.h"
 #import "DejalActivityView.h"
 #import "IMessageAppDelegate.h"
+#import "SqliteData.h"
 
 @interface TeacherDetailViewController ()
 {
@@ -43,7 +44,11 @@
 }
 
 - (IBAction)sendMessage:(id)sender {
-    NSLog(@"aaaaaa");
+    SqliteData *util = [[SqliteData alloc] init];
+    BOOL isFriend = [util isFriend:teacher.userId];
+    if (!isFriend) {
+        [util addFriend:teacher];
+    }
 }
 
 - (void) initDraw: (NSString *)uid

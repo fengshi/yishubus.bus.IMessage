@@ -15,5 +15,6 @@
 @property (strong, nonatomic) IBOutlet UITextField *passTextField;
 
 - (IBAction)loginAction:(id)sender;
+- (IBAction)closeKeybord:(id)sender;
 
 @end

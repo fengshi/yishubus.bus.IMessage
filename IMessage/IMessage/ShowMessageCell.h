@@ -10,4 +10,10 @@
 
 @interface ShowMessageCell : UITableViewCell
 
+@property (strong, nonatomic) IBOutlet UILabel *name;
+@property (strong, nonatomic) IBOutlet UILabel *talktime;
+@property (strong, nonatomic) IBOutlet UILabel *msg;
+
+@property (strong, nonatomic) IBOutlet UIImageView *tView;
+- (void) initDraw:(NSMutableDictionary *) directionary;
 @end

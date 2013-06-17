@@ -50,7 +50,7 @@
     }
     sqlite3_finalize(statement);
     
-    const char *createMessageSql = "create table if not exists message (id integer primary key autoincrement,fid text,tid text,msg text,talktime text,isload integer)";
+    const char *createMessageSql = "create table if not exists message (id integer primary key autoincrement,fid text,tid text,msg text,talktime text,isload integer,mid text,userid text)";
     if (sqlite3_prepare_v2(db, createMessageSql, -1, &statement, nil) != SQLITE_OK) {
         UIAlertView *showView = [[UIAlertView alloc] initWithTitle:@"初始化聊天" message:@"解析建表语句失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [showView show];
@@ -111,6 +111,106 @@
         [self close];
     }
     return NO;
+}
+
+- (AddressBook *) getFriend:(NSString *)uid
+{
+    AddressBook *friend = [[AddressBook alloc] init];
+    if ([self open]) {
+        NSString *mid = [[NSUserDefaults standardUserDefaults] objectForKey:@"id"];
+        NSString *sql = @"select * from addressbook where mid = ? and userid = ?";
+        sqlite3_stmt *statement;
+        if (sqlite3_prepare_v2(db, [sql UTF8String], -1, &statement, nil) == SQLITE_OK) {
+            sqlite3_bind_text(statement, 1, [mid UTF8String], -1, nil);
+            sqlite3_bind_text(statement, 2, [uid UTF8String], -1, nil);
+            
+            while (sqlite3_step(statement) == SQLITE_ROW) {
+                NSString *code = [[NSString alloc] initWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+                NSString *name = [[NSString alloc] initWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+                int type = sqlite3_column_int(statement, 3);
+                NSString *label = [[NSString alloc] initWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
+                int headBytes = sqlite3_column_bytes(statement, 5);
+                NSData *head = [NSData dataWithBytes:sqlite3_column_blob(statement, 5) length:headBytes];
+                UIImage *headImage = [UIImage imageWithData:head];
+                NSString *area = [[NSString alloc] initWithUTF8String:(char *)sqlite3_column_text(statement, 6)];
+                NSString *school = [[NSString alloc] initWithUTF8String:(char *)sqlite3_column_text(statement, 8)];
+                NSString *info = [[NSString alloc] initWithUTF8String:(char *)sqlite3_column_text(statement, 9)];
+                NSString *tutorway = [[NSString alloc] initWithUTF8String:(char *)sqlite3_column_text(statement, 10)];
+                NSString *edutag = [[NSString alloc] initWithUTF8String:(char *)sqlite3_column_text(statement, 11)];
+                friend.code = code;
+                friend.name = name;
+                friend.head = headImage;
+                friend.label = label;
+                friend.type = type;
+                friend.area = area;
+                friend.userId = uid;
+                friend.school = school;
+                friend.info = info;
+                friend.tutorWay = tutorway;
+                friend.eduTag = edutag;
+            }
+        }
+        sqlite3_finalize(statement);
+        [self close];
+    }
+    return friend;
+}
+
+- (NSMutableArray *) bookMessage
+{
+    NSMutableArray *result = [[NSMutableArray alloc] init];
+    if ([self open]) {
+        NSString *mid = [[NSUserDefaults standardUserDefaults] objectForKey:@"id"];
+        // -- find my all friends
+        NSString *sql = @"select userid from message where mid = ? group by userid";
+        sqlite3_stmt *statement;
+        if (sqlite3_prepare_v2(db, [sql UTF8String], -1, &statement, nil) == SQLITE_OK) {
+            sqlite3_bind_text(statement, 1, [mid UTF8String], -1, nil);
+            while (sqlite3_step(statement) == SQLITE_ROW) {
+                NSString *userid = [[NSString alloc] initWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                NSMutableDictionary *friendMessageDirectionary = [[NSMutableDictionary alloc] init];
+                [friendMessageDirectionary setObject:userid forKey:@"userid"];
+                [result addObject:friendMessageDirectionary];
+            }
+        }
+        sqlite3_finalize(statement);
+        // -- count friend all unload message number
+        for (int i=0; i<result.count; i++) {
+            NSMutableDictionary *friendMessageDirectionary = [result objectAtIndex:i];
+            NSString *userid = [friendMessageDirectionary objectForKey:@"userid"];
+            sql = @"select count(*) from message where mid = ? and userid = ? and isload = ?";
+            if (sqlite3_prepare_v2(db, [sql UTF8String], -1, &statement, nil) == SQLITE_OK) {
+                sqlite3_bind_text(statement, 1, [mid UTF8String], -1, nil);
+                sqlite3_bind_text(statement, 2, [userid UTF8String], -1, nil);
+                sqlite3_bind_int(statement, 3, 1);
+                
+                while (sqlite3_step(statement) == SQLITE_ROW) {
+                    int unloadNumber = sqlite3_column_int(statement, 0);
+                    [friendMessageDirectionary setObject:[NSNumber numberWithInt:unloadNumber] forKey:@"unload"];
+                }
+            }
+            sqlite3_finalize(statement);
+        }
+        // -- find friend message last on
+        for (int i=0; i<result.count; i++) {
+            NSMutableDictionary *friendMessageDirectionary = [result objectAtIndex:i];
+            NSString *userid = [friendMessageDirectionary objectForKey:@"userid"];
+            sql = @"select msg,talktime from message where mid = ? and userid = ? order by id desc limit 1 offset 0";
+            if (sqlite3_prepare_v2(db, [sql UTF8String], -1, &statement, nil) == SQLITE_OK) {
+                sqlite3_bind_text(statement, 1, [mid UTF8String], -1, nil);
+                sqlite3_bind_text(statement, 2, [userid UTF8String], -1, nil);
+                while (sqlite3_step(statement) == SQLITE_ROW) {
+                    NSString *lastMsg = [[NSString alloc] initWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                    NSString *talktime = [[NSString alloc] initWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+                    [friendMessageDirectionary setObject:lastMsg forKey:@"msg"];
+                    [friendMessageDirectionary setObject:talktime forKey:@"time"];
+                }
+            }
+            sqlite3_finalize(statement);
+        }
+        [self close];
+    }
+    return result;
 }
 
 - (void) removeSqlite

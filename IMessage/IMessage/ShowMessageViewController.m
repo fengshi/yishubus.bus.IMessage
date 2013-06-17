@@ -10,7 +10,7 @@
 
 @interface ShowMessageViewController ()
 {
-    NSArray *result;
+    NSMutableArray *result;
 }
 
 @end
@@ -27,6 +27,13 @@
         self.tabBarItem = item;
     }
     return self;
+}
+
+-(void) initDraw:(NSMutableArray *)array
+{
+    self.tView.dataSource = self;
+    self.tView.delegate = self;
+    result = array;
 }
 
 - (void)viewDidLoad
@@ -74,5 +81,28 @@
 - (void) locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
     [manager stopUpdatingLocation];
+}
+
+- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return result.count;
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    return cell.frame.size.height;
+}
+
+- (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *cellString = @"showMessageCell";
+    UINib *nib = [UINib nibWithNibName:@"ShowMessageCell" bundle:nil];
+    [tableView registerNib:nib forCellReuseIdentifier:cellString];
 }
 @end

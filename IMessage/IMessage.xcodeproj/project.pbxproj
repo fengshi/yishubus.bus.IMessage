@@ -90,6 +90,9 @@
 		8B1D0E1317575EDB00A17375 /* bar1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B1D0E1117575EDB00A17375 /* bar1@2x.png */; };
 		8B1D0E1717584DC500A17375 /* IMSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1D0E1517584DC500A17375 /* IMSettingViewController.m */; };
 		8B1D0E1817584DC500A17375 /* IMSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B1D0E1617584DC500A17375 /* IMSettingViewController.xib */; };
+		8B9075FD176EE07C00DB0D3F /* ShowMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9075FC176EE07C00DB0D3F /* ShowMessageCell.m */; };
+		8B9075FF176EE0A400DB0D3F /* ShowMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B9075FE176EE0A400DB0D3F /* ShowMessageCell.xib */; };
+		8B907607176F0A1E00DB0D3F /* JSBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B907601176EF3DC00DB0D3F /* JSBadgeView.m */; };
 		8B9446AC175C71FB00171B35 /* DejalActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9446AB175C71FB00171B35 /* DejalActivityView.m */; };
 		8B9446AF175D8FFA00171B35 /* SqliteData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9446AE175D8FFA00171B35 /* SqliteData.m */; };
 		8B9446B31760635900171B35 /* FindLevelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9446B11760635900171B35 /* FindLevelViewController.m */; };
@@ -263,6 +266,11 @@
 		8B1D0E1417584DC500A17375 /* IMSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMSettingViewController.h; sourceTree = "<group>"; };
 		8B1D0E1517584DC500A17375 /* IMSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMSettingViewController.m; sourceTree = "<group>"; };
 		8B1D0E1617584DC500A17375 /* IMSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IMSettingViewController.xib; sourceTree = "<group>"; };
+		8B9075FB176EE07C00DB0D3F /* ShowMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowMessageCell.h; sourceTree = "<group>"; };
+		8B9075FC176EE07C00DB0D3F /* ShowMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowMessageCell.m; sourceTree = "<group>"; };
+		8B9075FE176EE0A400DB0D3F /* ShowMessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowMessageCell.xib; sourceTree = "<group>"; };
+		8B907600176EF3DC00DB0D3F /* JSBadgeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSBadgeView.h; sourceTree = "<group>"; };
+		8B907601176EF3DC00DB0D3F /* JSBadgeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JSBadgeView.m; sourceTree = "<group>"; };
 		8B9446AA175C71FB00171B35 /* DejalActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DejalActivityView.h; sourceTree = "<group>"; };
 		8B9446AB175C71FB00171B35 /* DejalActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DejalActivityView.m; sourceTree = "<group>"; };
 		8B9446AD175D8FFA00171B35 /* SqliteData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SqliteData.h; sourceTree = "<group>"; };
@@ -405,6 +413,9 @@
 				8BA3443717631F3500DC0E53 /* TalkMessageViewController.h */,
 				8BA3443817631F3600DC0E53 /* TalkMessageViewController.m */,
 				8BA3443917631F3700DC0E53 /* TalkMessageViewController.xib */,
+				8B9075FB176EE07C00DB0D3F /* ShowMessageCell.h */,
+				8B9075FC176EE07C00DB0D3F /* ShowMessageCell.m */,
+				8B9075FE176EE0A400DB0D3F /* ShowMessageCell.xib */,
 			);
 			path = IMessage;
 			sourceTree = "<group>";
@@ -727,6 +738,8 @@
 		8B1D0DEE1757570F00A17375 /* util */ = {
 			isa = PBXGroup;
 			children = (
+				8B907600176EF3DC00DB0D3F /* JSBadgeView.h */,
+				8B907601176EF3DC00DB0D3F /* JSBadgeView.m */,
 				8B9446AA175C71FB00171B35 /* DejalActivityView.h */,
 				8B9446AB175C71FB00171B35 /* DejalActivityView.m */,
 				8B1D0DEF1757574400A17375 /* RequestURL.h */,
@@ -806,6 +819,7 @@
 				8BA3442F1761BBA900DC0E53 /* TeacherViewCellController.xib in Resources */,
 				8BA344341762D2D000DC0E53 /* TeacherDetailViewController.xib in Resources */,
 				8BA3443B17631F3700DC0E53 /* TalkMessageViewController.xib in Resources */,
+				8B9075FF176EE0A400DB0D3F /* ShowMessageCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -816,6 +830,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B907607176F0A1E00DB0D3F /* JSBadgeView.m in Sources */,
 				8B1D0D181757550C00A17375 /* main.m in Sources */,
 				8B1D0D1C1757550C00A17375 /* IMessageAppDelegate.m in Sources */,
 				8B1D0D6F175755A300A17375 /* ASIAuthenticationDialog.m in Sources */,
@@ -882,6 +897,7 @@
 				8BA344331762D2D000DC0E53 /* TeacherDetailViewController.m in Sources */,
 				8BA3443A17631F3700DC0E53 /* TalkMessageViewController.m in Sources */,
 				8BA3443E176327D800DC0E53 /* TalkMessage.m in Sources */,
+				8B9075FD176EE07C00DB0D3F /* ShowMessageCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

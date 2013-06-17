@@ -7,6 +7,7 @@
 //
 
 #import "ShowMessageCell.h"
+#import "JSBadgeView.h"
 
 @implementation ShowMessageCell
 
@@ -26,4 +27,24 @@
     // Configure the view for the selected state
 }
 
+- (void) initDraw:(NSMutableDictionary *) directionary
+{
+    UIImage *headImage = [directionary objectForKey:@"head"];
+    NSString *msg = [directionary objectForKey:@"msg"];
+    NSString *time = [directionary objectForKey:@"time"];
+    NSString *name = [directionary objectForKey:@"name"];
+    NSNumber *unload = [directionary objectForKey:@"unload"];
+    
+    self.name.text = name;
+    self.talktime.text = time;
+    self.msg.text = msg;
+    
+    self.tView.image = headImage;
+    
+    JSBadgeView *badgeView = [[JSBadgeView alloc] initWithParentView:self.tView alignment:JSBadgeViewAlignmentTopRight];
+    if (unload >= 0) {
+        badgeView.badgeText = [unload stringValue];
+    }
+
+}
 @end

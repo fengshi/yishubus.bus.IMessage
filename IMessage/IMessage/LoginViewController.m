@@ -53,4 +53,9 @@
     }
     
 }
+
+- (IBAction)closeKeybord:(id)sender {
+    [self.userTextField resignFirstResponder];
+    [self.passTextField resignFirstResponder];
+}
 @end
