@@ -42,7 +42,7 @@
     self.tView.image = headImage;
     
     JSBadgeView *badgeView = [[JSBadgeView alloc] initWithParentView:self.tView alignment:JSBadgeViewAlignmentTopRight];
-    if (unload >= 0) {
+    if (unload.intValue > 0) {
         badgeView.badgeText = [unload stringValue];
     }
 

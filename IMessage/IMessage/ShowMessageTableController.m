@@ -8,6 +8,8 @@
 
 #import "ShowMessageTableController.h"
 #import "IMessageService.h"
+#import "ShowMessageCell.h"
+#import "TalkMessageViewController.h"
 
 @interface ShowMessageTableController ()
 
@@ -80,15 +82,20 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"showMessageCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UINib *nib = [UINib nibWithNibName:@"ShowMessageCell" bundle:nil];
+    [tableView registerNib:nib forCellReuseIdentifier:CellIdentifier];
     
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
+    ShowMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     NSMutableDictionary *dire = [self.messageArray objectAtIndex:indexPath.row];
-    cell.textLabel.text = [dire objectForKey:@"name"];
+    [cell initDraw:dire];
     return cell;
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+    return cell.frame.size.height;
 }
 
 /*
@@ -100,19 +107,17 @@
 }
 */
 
-/*
-// Override to support editing the table view.
+
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
+    }
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
 }
-*/
+
 
 /*
 // Override to support rearranging the table view.
@@ -134,13 +139,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    NSMutableDictionary *dire = [self.messageArray objectAtIndex:indexPath.row];
+    
+    TalkMessageViewController *talkController = [[TalkMessageViewController alloc] init];
+    [talkController setChatWithUser:[dire objectForKey:@"userid"]];
+    [self.navigationController pushViewController:talkController animated:YES];
 }
 
 @end
