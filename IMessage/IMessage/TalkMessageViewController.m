@@ -8,17 +8,20 @@
 
 #import "TalkMessageViewController.h"
 #import "IMessageAppDelegate.h"
+#import "SqliteData.h"
+#import "AddressBook.h"
+#import "TalkMessage.h"
 
 @interface TalkMessageViewController ()
 {
     NSMutableArray *messageArray;
+    NSString *chatWithUser;
 }
 @end
 
 @implementation TalkMessageViewController
 @synthesize tView;
 @synthesize textField;
-@synthesize chatWithUser;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -29,13 +32,23 @@
     return self;
 }
 
+-(void) setChatWithUser:(NSString *)userid
+{
+    chatWithUser = userid;
+    SqliteData *util = [[SqliteData alloc] init];
+    AddressBook *friend = [util getFriend:chatWithUser];
+    self.navigationItem.title = friend.name;
+    
+    self.tView.delegate = self;
+    self.tView.dataSource = self;
+    messageArray = [NSMutableArray array];
+    
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.tView.delegate = self;
-    self.tView.dataSource = self;
     self.tView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    messageArray = [NSMutableArray array];
     [textField becomeFirstResponder];
     
     IMessageAppDelegate *appDelegate = [self appDelegate];

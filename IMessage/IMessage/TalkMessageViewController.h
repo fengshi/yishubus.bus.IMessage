@@ -15,7 +15,7 @@
 
 @property (strong, nonatomic) IBOutlet UITextField *textField;
 
-@property (nonatomic, retain) NSString *chatWithUser;
+-(void) setChatWithUser:(NSString *)userid;
 
 - (IBAction)clickMessage:(id)sender;
 

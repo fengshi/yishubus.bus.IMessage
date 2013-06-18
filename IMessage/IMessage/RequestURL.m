@@ -22,6 +22,8 @@
             return [ACTION_MAIN stringByAppendingString:@"websitMoblieAction.do?action=find"];
         case USER_DETAIL_URL:
             return [ACTION_MAIN stringByAppendingString:@"websitMoblieAction.do?action=getDetail"];
+        case SAVE_MESSAGE:
+            return [ACTION_MAIN stringByAppendingString:@"websitMobileAction.do?action=saveMessage"];
         default:
             break;
     }

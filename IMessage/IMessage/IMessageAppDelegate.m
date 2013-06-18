@@ -11,6 +11,7 @@
 #import "LoginViewController.h"
 #import "Constants.h"
 #import "IMessageService.h"
+#import "SqliteData.h"
 
 @implementation IMessageAppDelegate
 @synthesize xmppStream;
@@ -19,6 +20,12 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+//    SqliteData *util = [[SqliteData alloc] init];
+//    [util removeSqlite];
+//    
+//    IMessageService *service = [[IMessageService alloc] init];
+//    [service removeLoginMessage];
     
     NSString *login = [[NSUserDefaults standardUserDefaults] objectForKey:@"mail"];
     

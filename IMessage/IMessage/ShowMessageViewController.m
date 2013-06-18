@@ -7,6 +7,7 @@
 //
 
 #import "ShowMessageViewController.h"
+#import "ShowMessageCell.h"
 
 @interface ShowMessageViewController ()
 {
@@ -104,5 +105,10 @@
     static NSString *cellString = @"showMessageCell";
     UINib *nib = [UINib nibWithNibName:@"ShowMessageCell" bundle:nil];
     [tableView registerNib:nib forCellReuseIdentifier:cellString];
+    
+    ShowMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:cellString];
+    NSMutableDictionary *dictionary = [result objectAtIndex:indexPath.row];
+    [cell initDraw:dictionary];
+    return cell;
 }
 @end

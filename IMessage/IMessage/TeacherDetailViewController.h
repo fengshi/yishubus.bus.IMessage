@@ -24,6 +24,7 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *info;
 
+@property (strong, nonatomic) IBOutlet UILabel *code;
 
 - (IBAction)sendMessage:(id)sender;
 

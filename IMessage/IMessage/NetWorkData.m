@@ -12,6 +12,7 @@
 #import "Constants.h"
 #import "FindLevel.h"
 #import "AddressBook.h"
+#import "ASIFormDataRequest.h"
 
 @implementation NetWorkData
 
@@ -31,9 +32,8 @@
         NSString *code = [resultDictionary objectForKey:@"code"];
         if ([code isEqualToString:@"ok"]) {
             NSString *nickName = [resultDictionary objectForKey:@"nickName"];
-            NSString *nid = [resultDictionary objectForKey:@"id"];
-//            [nid stringByAppendingString:OPEN_FILE_SERVER];
-
+            NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+            NSString *nid = [formatter stringFromNumber:[resultDictionary objectForKey:@"id"]];
             NSString *type = [resultDictionary objectForKey:@"type"];
             NSString *photo = [resultDictionary objectForKey:@"photo"];
             
@@ -110,8 +110,8 @@
             NSArray *resultArray = [resultDirectionary objectForKey:@"items"];
             for (int i=0; i<[resultArray count]; i++) {
                 NSDictionary *dictionary = [resultArray objectAtIndex:i];
-                NSString *nid = [dictionary objectForKey:@"id"];
-
+                NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+                NSString *nid = [formatter stringFromNumber:[dictionary objectForKey:@"id"]];
                 NSString *sex = [dictionary objectForKey:@"sex"];
                 UIImage *headPhoto = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[dictionary objectForKey:@"photo"]]]];
                 NSString *nickName = [dictionary objectForKey:@"nickName"];
@@ -181,5 +181,23 @@
         book.pics = bookPics;
     }
     return book;
+}
+
++ (void) addMessage:(NSString *)mid toUser:(NSString *)uid sendDate:(NSString *)talkTime msgtype:(NSString *)type msg:(NSString *)msg url:(NSString *)dataUrl;
+{
+    NSURL *url = [NSURL URLWithString:dataUrl];
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    [request setPostValue:mid forKey:@"authorId"];
+    [request setPostValue:uid forKey:@"fromId"];
+//    [request setPostValue:@"" forKey:@"createDate"];
+    [request setPostValue:type forKey:@"msgType"];
+    [request setPostValue:msg forKey:@"txt"];
+    
+    [request startSynchronous];
+    NSError *error = [request error];
+    if (!error) {
+        NSString *jsonRequest = [request responseString];
+        NSLog(@"%@",jsonRequest);
+    }
 }
 @end

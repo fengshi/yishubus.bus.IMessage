@@ -96,6 +96,18 @@
     return YES;
 }
 
+- (void) addMessage:(NSString *)mid fromid:(NSString *)fid toid:(NSString *)tid talkMessage:(NSString *)msg talkTime:(NSString *)time load:(int)isload userid:(NSString *)userid
+{
+    if ([self open]) {
+        char *errormsg;
+        
+        NSString *sql = [NSString stringWithFormat:@"insert into message (fid,tid,msg,talktime,isload,mid,userid) values('%@','%@','%@','%@',%d,'%@','%@')",fid,tid,msg,time,isload,mid,userid];
+        if (sqlite3_exec(db, [sql UTF8String], nil, nil, &errormsg) == SQLITE_OK) {
+        }
+        [self close];
+    }
+}
+
 - (BOOL) isFriend:(NSString *)uid
 {
     if ([self open]) {
@@ -137,6 +149,7 @@
                 NSString *info = [[NSString alloc] initWithUTF8String:(char *)sqlite3_column_text(statement, 9)];
                 NSString *tutorway = [[NSString alloc] initWithUTF8String:(char *)sqlite3_column_text(statement, 10)];
                 NSString *edutag = [[NSString alloc] initWithUTF8String:(char *)sqlite3_column_text(statement, 11)];
+                
                 friend.code = code;
                 friend.name = name;
                 friend.head = headImage;
@@ -213,6 +226,21 @@
     return result;
 }
 
+- (BOOL) updateFriendIsLoad:(NSString *)uid
+{
+    if ([self open]) {
+        char *errormsg;
+        NSString *mid = [[NSUserDefaults standardUserDefaults] objectForKey:@"id"];
+        NSString *sql = [NSString stringWithFormat:@"update message set isload = 2 where mid = '%@' and userid = '%@'",mid,uid];
+        if (sqlite3_exec(db, [sql UTF8String], nil, nil, &errormsg) == SQLITE_OK) {
+            [self close];
+            return YES;
+        }
+        [self close];
+    }
+    return NO;
+}
+
 - (void) removeSqlite
 {
     if ([self open]) {
@@ -223,6 +251,7 @@
     BOOL find = [fileManager fileExistsAtPath:filePath];
     if (find) {
         [fileManager removeItemAtPath:filePath error:nil];
+        NSLog(@"数据库已删除");
     } else {
         NSLog(@"数据库不存在");
     }
