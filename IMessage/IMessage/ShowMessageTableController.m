@@ -7,6 +7,7 @@
 //
 
 #import "ShowMessageTableController.h"
+#import "IMessageService.h"
 
 @interface ShowMessageTableController ()
 
@@ -18,7 +19,10 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-        // Custom initialization
+        self.navigationItem.title = @"消息";
+        UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"消息" image:nil tag:0];
+        [item setFinishedSelectedImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"bar1" ofType:@"png"]] withFinishedUnselectedImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"bar1" ofType:@"png"]]];
+        self.tabBarItem = item;
     }
     return self;
 }
@@ -26,12 +30,33 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self loadArrays];
+}
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+- (void) loadArrays
+{
+    dispatch_queue_t downloadArray = dispatch_queue_create("mainArray", nil);
+    dispatch_async(downloadArray, ^{
+        IMessageService *util = [[IMessageService alloc] init];
+        self.messageArray = [util showMessageInitLoadFriends];
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+    });
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    dispatch_queue_t downloadArray = dispatch_queue_create("mainArray", nil);
+    dispatch_async(downloadArray, ^{
+        IMessageService *util = [[IMessageService alloc] init];
+        self.messageArray = [util showMessageInitLoadFriends];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+    });
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,25 +69,25 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    return [self.messageArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    static NSString *CellIdentifier = @"showMessageCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    // Configure the cell...
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
     
+    NSMutableDictionary *dire = [self.messageArray objectAtIndex:indexPath.row];
+    cell.textLabel.text = [dire objectForKey:@"name"];
     return cell;
 }
 

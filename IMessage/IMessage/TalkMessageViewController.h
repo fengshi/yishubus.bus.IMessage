@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "MessageReceiveDelegate.h"
 
-@interface TalkMessageViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,MessageReceiveDelegate>
+@interface TalkMessageViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,MessageReceiveDelegate,UITextFieldDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tView;
 
-@property (strong, nonatomic) IBOutlet UITextField *textField;
+@property (strong, nonatomic) IBOutlet UITextField *myTextField;
 
 -(void) setChatWithUser:(NSString *)userid;
 

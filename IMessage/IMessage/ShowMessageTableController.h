@@ -10,4 +10,6 @@
 
 @interface ShowMessageTableController : UITableViewController
 
+@property (strong, nonatomic) NSMutableArray *messageArray;
+
 @end

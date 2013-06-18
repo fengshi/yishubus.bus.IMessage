@@ -7,13 +7,13 @@
 //
 
 #import "IMessageViewController.h"
-#import "ShowMessageViewController.h"
 #import "IMAddressBookController.h"
 #import "IMSettingViewController.h"
 #import "DejalActivityView.h"
 #import "IMessageAppDelegate.h"
 #import "FindLevelViewController.h"
 #import "SqliteData.h"
+#import "ShowMessageTableController.h"
 
 @interface IMessageViewController ()
 
@@ -33,18 +33,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    SqliteData *data = [[SqliteData alloc]init];
     
     [DejalBezelActivityView activityViewForView:[self appDelegate].window];    
     dispatch_queue_t queue = dispatch_queue_create("act", nil);
     dispatch_async(queue, ^{
-        NSMutableArray *array = data.bookMessage;
         dispatch_async(dispatch_get_main_queue(), ^{
             self.tabBarController = [[UITabBarController alloc] init];
             [self.tabBarController.view setFrame:self.view.bounds];
             
-            ShowMessageViewController *messageController = [[ShowMessageViewController alloc] initWithNibName:@"ShowMessageViewController" bundle:nil];
-            [messageController initDraw:array];
+//            ShowMessageViewController *messageController = [[ShowMessageViewController alloc] initWithStyle:UITableViewStylePlain];
+            ShowMessageTableController *messageController = [[ShowMessageTableController alloc] initWithStyle:UITableViewStylePlain];
             UINavigationController *messageNav = [[UINavigationController alloc] initWithRootViewController:messageController];
             messageNav.navigationBar.tintColor = [UIColor colorWithRed:50/255.0 green:50/255.0 blue:50/255.0 alpha:0];
                 

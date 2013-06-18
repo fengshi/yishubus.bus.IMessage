@@ -196,8 +196,8 @@
     [request startSynchronous];
     NSError *error = [request error];
     if (!error) {
-        NSString *jsonRequest = [request responseString];
-        NSLog(@"%@",jsonRequest);
+        [request responseString];
+//        NSLog(@"%@",jsonRequest);
     }
 }
 @end

@@ -102,8 +102,8 @@
         char *errormsg;
         
         NSString *sql = [NSString stringWithFormat:@"insert into message (fid,tid,msg,talktime,isload,mid,userid) values('%@','%@','%@','%@',%d,'%@','%@')",fid,tid,msg,time,isload,mid,userid];
-        if (sqlite3_exec(db, [sql UTF8String], nil, nil, &errormsg) == SQLITE_OK) {
-        }
+        
+        sqlite3_exec(db, [sql UTF8String], nil, nil, &errormsg);
         [self close];
     }
 }
@@ -116,6 +116,8 @@
         sqlite3_stmt *statement;
         if (sqlite3_prepare_v2(db, [sql UTF8String], -1, &statement, nil) == SQLITE_OK) {
             while (sqlite3_step(statement) == SQLITE_ROW) {
+                sqlite3_finalize(statement);
+                [self close];
                 return YES;
             }
         }

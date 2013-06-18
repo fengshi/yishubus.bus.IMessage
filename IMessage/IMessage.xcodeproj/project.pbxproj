@@ -82,8 +82,6 @@
 		8B1D0E01175758E500A17375 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1D0DFF175758E500A17375 /* LoginViewController.m */; };
 		8B1D0E02175758E500A17375 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B1D0E00175758E500A17375 /* LoginViewController.xib */; };
 		8B1D0E0517575A3500A17375 /* IMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1D0E0417575A3500A17375 /* IMessageViewController.m */; };
-		8B1D0E0817575A8700A17375 /* ShowMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1D0E0717575A8700A17375 /* ShowMessageViewController.m */; };
-		8B1D0E0A17575AA900A17375 /* ShowMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B1D0E0917575AA900A17375 /* ShowMessageViewController.xib */; };
 		8B1D0E0E17575BAB00A17375 /* IMAddressBookController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1D0E0C17575BAB00A17375 /* IMAddressBookController.m */; };
 		8B1D0E0F17575BAB00A17375 /* IMAddressBookController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B1D0E0D17575BAB00A17375 /* IMAddressBookController.xib */; };
 		8B1D0E1217575EDB00A17375 /* bar1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B1D0E1017575EDB00A17375 /* bar1.png */; };
@@ -109,6 +107,7 @@
 		8BA3443A17631F3700DC0E53 /* TalkMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BA3443817631F3600DC0E53 /* TalkMessageViewController.m */; };
 		8BA3443B17631F3700DC0E53 /* TalkMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BA3443917631F3700DC0E53 /* TalkMessageViewController.xib */; };
 		8BA3443E176327D800DC0E53 /* TalkMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BA3443D176327D800DC0E53 /* TalkMessage.m */; };
+		8BA452A7177061DE00A78AEC /* ShowMessageTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BA452A6177061DE00A78AEC /* ShowMessageTableController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -255,9 +254,6 @@
 		8B1D0E00175758E500A17375 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		8B1D0E0317575A3400A17375 /* IMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMessageViewController.h; sourceTree = "<group>"; };
 		8B1D0E0417575A3500A17375 /* IMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMessageViewController.m; sourceTree = "<group>"; };
-		8B1D0E0617575A8600A17375 /* ShowMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowMessageViewController.h; sourceTree = "<group>"; };
-		8B1D0E0717575A8700A17375 /* ShowMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowMessageViewController.m; sourceTree = "<group>"; };
-		8B1D0E0917575AA900A17375 /* ShowMessageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowMessageViewController.xib; sourceTree = "<group>"; };
 		8B1D0E0B17575BAB00A17375 /* IMAddressBookController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMAddressBookController.h; sourceTree = "<group>"; };
 		8B1D0E0C17575BAB00A17375 /* IMAddressBookController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMAddressBookController.m; sourceTree = "<group>"; };
 		8B1D0E0D17575BAB00A17375 /* IMAddressBookController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IMAddressBookController.xib; sourceTree = "<group>"; };
@@ -298,6 +294,8 @@
 		8BA3443917631F3700DC0E53 /* TalkMessageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TalkMessageViewController.xib; sourceTree = "<group>"; };
 		8BA3443C176327D800DC0E53 /* TalkMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TalkMessage.h; sourceTree = "<group>"; };
 		8BA3443D176327D800DC0E53 /* TalkMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TalkMessage.m; sourceTree = "<group>"; };
+		8BA452A5177061DE00A78AEC /* ShowMessageTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowMessageTableController.h; sourceTree = "<group>"; };
+		8BA452A6177061DE00A78AEC /* ShowMessageTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowMessageTableController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -385,9 +383,6 @@
 				8B1D0E00175758E500A17375 /* LoginViewController.xib */,
 				8B1D0E0317575A3400A17375 /* IMessageViewController.h */,
 				8B1D0E0417575A3500A17375 /* IMessageViewController.m */,
-				8B1D0E0617575A8600A17375 /* ShowMessageViewController.h */,
-				8B1D0E0717575A8700A17375 /* ShowMessageViewController.m */,
-				8B1D0E0917575AA900A17375 /* ShowMessageViewController.xib */,
 				8B1D0E0B17575BAB00A17375 /* IMAddressBookController.h */,
 				8B1D0E0C17575BAB00A17375 /* IMAddressBookController.m */,
 				8B1D0E0D17575BAB00A17375 /* IMAddressBookController.xib */,
@@ -416,6 +411,8 @@
 				8B9075FB176EE07C00DB0D3F /* ShowMessageCell.h */,
 				8B9075FC176EE07C00DB0D3F /* ShowMessageCell.m */,
 				8B9075FE176EE0A400DB0D3F /* ShowMessageCell.xib */,
+				8BA452A5177061DE00A78AEC /* ShowMessageTableController.h */,
+				8BA452A6177061DE00A78AEC /* ShowMessageTableController.m */,
 			);
 			path = IMessage;
 			sourceTree = "<group>";
@@ -808,7 +805,6 @@
 				8B1D0DCF175755B200A17375 /* README.txt in Resources */,
 				8B1D0DD4175755B200A17375 /* build-libidn.sh in Resources */,
 				8B1D0E02175758E500A17375 /* LoginViewController.xib in Resources */,
-				8B1D0E0A17575AA900A17375 /* ShowMessageViewController.xib in Resources */,
 				8B1D0E0F17575BAB00A17375 /* IMAddressBookController.xib in Resources */,
 				8B1D0E1217575EDB00A17375 /* bar1.png in Resources */,
 				8B1D0E1317575EDB00A17375 /* bar1@2x.png in Resources */,
@@ -884,7 +880,6 @@
 				8B1D0DFD1757588900A17375 /* IMessageService.m in Sources */,
 				8B1D0E01175758E500A17375 /* LoginViewController.m in Sources */,
 				8B1D0E0517575A3500A17375 /* IMessageViewController.m in Sources */,
-				8B1D0E0817575A8700A17375 /* ShowMessageViewController.m in Sources */,
 				8B1D0E0E17575BAB00A17375 /* IMAddressBookController.m in Sources */,
 				8B1D0E1717584DC500A17375 /* IMSettingViewController.m in Sources */,
 				8B9446AC175C71FB00171B35 /* DejalActivityView.m in Sources */,
@@ -898,6 +893,7 @@
 				8BA3443A17631F3700DC0E53 /* TalkMessageViewController.m in Sources */,
 				8BA3443E176327D800DC0E53 /* TalkMessage.m in Sources */,
 				8B9075FD176EE07C00DB0D3F /* ShowMessageCell.m in Sources */,
+				8BA452A7177061DE00A78AEC /* ShowMessageTableController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
