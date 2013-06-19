@@ -15,6 +15,8 @@
 #import "IMessageService.h"
 #import "NetWorkData.h"
 #import "RequestURL.h"
+#import "TalkMessage.h"
+#import "TalkMessageCell.h"
 
 @interface TalkMessageViewController ()
 {
@@ -39,23 +41,34 @@
 -(void) setChatWithUser:(NSString *)userid
 {
     chatWithUser = userid;
+    
     SqliteData *util = [[SqliteData alloc] init];
     
     AddressBook *friend = [util getFriend:chatWithUser];
     self.navigationItem.title = friend.name;
     
-    self.tView.delegate = self;
-    self.tView.dataSource = self;
-    messageArray = [NSMutableArray array];
+    messageArray = [util friendAllMessages:chatWithUser];
+    [self.tView reloadData];
     
     [util updateFriendIsLoad:chatWithUser];
+    
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    CGFloat tab = self.tabBarController.tabBar.frame.size.height;
+    CGFloat fiel = self.myTextField.frame.size.height;
+    CGFloat nav = self.navigationController.navigationBar.frame.size.height;
+    
+    self.tView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-tab-fiel-nav) style:UITableViewStylePlain];
+    //    self.tView.frame = CGRectMake(0, 0, self.view.frame.size.width, 115);
+    [self.view addSubview:tView];
+    
+    self.tView.delegate = self;
+    self.tView.dataSource = self;
     self.tView.separatorStyle = UITableViewCellSeparatorStyleNone;
-//    [textField becomeFirstResponder];
     
     IMessageAppDelegate *appDelegate = [self appDelegate];
     appDelegate.messageReceiveDelegate = self;
@@ -109,6 +122,43 @@
     return [messageArray count];
 }
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *identifier = @"tblBubbleCell";
+    NSString *mid = [[NSUserDefaults standardUserDefaults] objectForKey:@"id"];
+    
+    TalkMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    if (cell == nil) {
+        cell = [[TalkMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+    }
+    
+    TalkMessage *talk = [messageArray objectAtIndex:[indexPath row]];
+    
+    CGSize textSize = {220,9999};
+    CGSize size = [talk.msg sizeWithFont:[UIFont systemFontOfSize:[UIFont systemFontSize]] constrainedToSize:textSize lineBreakMode:UILineBreakModeWordWrap];
+    cell.headerLabel.text = talk.talkTime;
+    cell.contextLabel.text = talk.msg;
+    cell.userInteractionEnabled = NO;
+    UIImage *bgImage = nil;
+    if ([talk.from isEqualToString:mid]) {
+        bgImage = [[UIImage imageNamed:@"bubblesomeone.png"] stretchableImageWithLeftCapWidth:20 topCapHeight:15];
+        [cell.contextLabel setFrame:CGRectMake(20, 40, size.width, size.height)];
+        [cell.bubImage setFrame:CGRectMake(cell.contextLabel.frame.origin.x - 20, cell.contextLabel.frame.origin.y - 10, size.width + 50, size.height + 25)];
+    } else {
+        bgImage = [[UIImage imageNamed:@"bubbleMine.png"] stretchableImageWithLeftCapWidth:14 topCapHeight:15];
+        [cell.contextLabel setFrame:CGRectMake(320 - size.width - 50, 40, size.width, size.height)];
+        [cell.bubImage setFrame:CGRectMake(cell.contextLabel.frame.origin.x - 10, cell.contextLabel.frame.origin.y - 10, size.width + 50, size.height + 25)];
+    }
+    
+    cell.bubImage.image = bgImage;
+    return cell;
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 84;
+}
+
 - (IBAction)clickMessage:(id)sender {
     NSString *message = self.myTextField.text;
     if (message.length > 0) {
@@ -120,6 +170,7 @@
         
         NSString *mid = [[NSUserDefaults standardUserDefaults] objectForKey:@"id"];
         NSString *toOpenfire = [chatWithUser stringByAppendingString:OPEN_FILE_SERVER];
+        
         NSString *fromOpenfire = [mid stringByAppendingString:OPEN_FILE_SERVER];
         [mes addAttributeWithName:@"to" stringValue:toOpenfire];
         [mes addAttributeWithName:@"from" stringValue:fromOpenfire];
@@ -131,6 +182,15 @@
         NSString *talkTime = [IMessageService getCurrentTime];
         SqliteData *util = [[SqliteData alloc] init];
         [util addMessage:mid fromid:mid toid:chatWithUser talkMessage:message talkTime:talkTime load:2 userid:chatWithUser];
+        
+        // -- add my array
+        TalkMessage *talk = [[TalkMessage alloc] init];
+        talk.from = mid;
+        talk.to = chatWithUser;
+        talk.msg = message;
+        talk.talkTime = [IMessageService getCurrentTime];
+        [messageArray addObject:talk];
+        [self.tView reloadData];
         
         // -- add server message
         dispatch_queue_t queuemessage = dispatch_queue_create("queuemessage", nil);
@@ -147,6 +207,20 @@
 - (void) messageReceive:(NSDictionary *)messageContent
 {
     
+    NSString *fid = [messageContent objectForKey:@"sender"];
+    NSString *mid = [[NSUserDefaults standardUserDefaults] objectForKey:@"id"];
+    NSString *talkTime = [IMessageService getCurrentTime];
+    SqliteData *util = [[SqliteData alloc] init];
+    
+    [util addMessage:mid fromid:fid toid:mid talkMessage:[messageContent objectForKey:@"msg"] talkTime:talkTime load:2 userid:fid];
+    
+    TalkMessage *talk = [[TalkMessage alloc] init];
+    talk.from = fid;
+    talk.to = mid;
+    talk.msg = [messageContent objectForKey:@"msg"];
+    talk.talkTime = talkTime;
+    [messageArray addObject:talk];
+    [self.tView reloadData];
 }
 
 - (IMessageAppDelegate *) appDelegate

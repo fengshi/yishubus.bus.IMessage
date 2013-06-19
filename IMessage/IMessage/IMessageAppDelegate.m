@@ -12,6 +12,7 @@
 #import "Constants.h"
 #import "IMessageService.h"
 #import "SqliteData.h"
+#import "MessageReceiveDelegate.h"
 
 @implementation IMessageAppDelegate
 @synthesize xmppStream;
@@ -20,12 +21,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    
-//    SqliteData *util = [[SqliteData alloc] init];
-//    [util removeSqlite];
-//    
-//    IMessageService *service = [[IMessageService alloc] init];
-//    [service removeLoginMessage];
     
     NSString *login = [[NSUserDefaults standardUserDefaults] objectForKey:@"mail"];
     
@@ -61,7 +56,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [self connect];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -75,6 +70,16 @@
     [xmppStream addDelegate:self delegateQueue:dispatch_get_main_queue()];
     
     [xmppStream setHostName:XMPP_MAIN];
+}
+
+-(void)goOnline{
+    XMPPPresence *presence = [XMPPPresence presence];
+    [[self xmppStream] sendElement:presence];
+}
+
+-(void)goOffline{
+    XMPPPresence *presence = [XMPPPresence presenceWithType:@"unavailable"];
+    [[self xmppStream] sendElement:presence];
 }
 
 - (BOOL) connect
@@ -91,8 +96,9 @@
     if (userId == nil || pass == nil) {
         return NO;
     }
+    NSString *loginOpenfire = [userId stringByAppendingString:OPEN_FILE_SERVER];
     
-    [xmppStream setMyJID:[XMPPJID jidWithString:[userId stringByAppendingString:OPEN_FILE_SERVER]]];
+    [xmppStream setMyJID:[XMPPJID jidWithString:loginOpenfire]];
     
     NSError *error = nil;
     if (![xmppStream connectWithTimeout:XMPPStreamTimeoutNone error:&error]) {
@@ -104,6 +110,7 @@
 - (void) disconnect
 {
     isOpenStream = NO;
+    [self goOffline];
     [xmppStream disconnect];
 }
 
@@ -115,14 +122,18 @@
     [[self xmppStream] authenticateWithPassword:pass error:&error];
 }
 
+- (void)xmppStreamDidAuthenticate:(XMPPStream *)sender{
+    [self goOnline];
+}
+
 - (void) xmppStream: (XMPPStream *) sender didReceiveMessage:(XMPPMessage *)message
 {
     NSString *msg = [[message elementForName:@"body"] stringValue];
-    NSString *from = [[message elementForName:@"from"] stringValue];
+    NSString *from = [[message attributeForName:@"from"] stringValue];
     
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [dict setObject:msg forKey:@"msg"];
-    [dict setObject:from forKey:@"sender"];
+    [dict setObject:[[from componentsSeparatedByString:@"@"] objectAtIndex:0] forKey:@"sender"];
     [dict setObject:[IMessageService getCurrentTime] forKey:@"time"];
     
     // -- 消息委托

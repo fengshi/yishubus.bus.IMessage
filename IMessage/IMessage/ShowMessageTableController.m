@@ -10,6 +10,7 @@
 #import "IMessageService.h"
 #import "ShowMessageCell.h"
 #import "TalkMessageViewController.h"
+#import "IMessageAppDelegate.h"
 
 @interface ShowMessageTableController ()
 
@@ -32,7 +33,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self loadArrays];
+//    IMessageAppDelegate *appDelegate = [self appDelegate];
+//    appDelegate.messageReceiveDelegate = self;
+//    [self loadArrays];
 }
 
 - (void) loadArrays
@@ -118,23 +121,6 @@
     }   
 }
 
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -146,4 +132,18 @@
     [self.navigationController pushViewController:talkController animated:YES];
 }
 
+- (void) messageReceive:(NSDictionary *)messageContent
+{
+    
+}
+
+- (IMessageAppDelegate *) appDelegate
+{
+    return (IMessageAppDelegate *)[[UIApplication sharedApplication] delegate];
+}
+
+- (XMPPStream *) xmppStream
+{
+    return [[self appDelegate] xmppStream];
+}
 @end

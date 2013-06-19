@@ -11,7 +11,7 @@
 
 @interface TalkMessageViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,MessageReceiveDelegate,UITextFieldDelegate>
 
-@property (strong, nonatomic) IBOutlet UITableView *tView;
+@property (strong, nonatomic) UITableView *tView;
 
 @property (strong, nonatomic) IBOutlet UITextField *myTextField;
 

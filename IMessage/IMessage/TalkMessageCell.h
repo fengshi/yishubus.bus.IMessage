@@ -10,4 +10,8 @@
 
 @interface TalkMessageCell : UITableViewCell
 
+@property (strong, nonatomic) UILabel *headerLabel;
+@property (strong, nonatomic) UIImageView *bubImage;
+@property (strong, nonatomic) UILabel *contextLabel;
+
 @end

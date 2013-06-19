@@ -7,14 +7,30 @@
 //
 
 #import "TalkMessageCell.h"
+#import "TalkMessage.h"
 
 @implementation TalkMessageCell
+@synthesize contextLabel;
+@synthesize bubImage;
+@synthesize headerLabel;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        // Initialization code
+        headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 300, 20)];
+        headerLabel.textAlignment = UITextAlignmentCenter;
+        headerLabel.font = [UIFont systemFontOfSize:[UIFont systemFontSize]];
+        [self.contentView addSubview:headerLabel];
+        
+        bubImage = [[UIImageView alloc] initWithFrame:CGRectZero];
+        [self.contentView addSubview:bubImage];
+        
+        contextLabel = [[UILabel alloc] init];
+        contextLabel.backgroundColor = [UIColor clearColor];
+        contextLabel.lineBreakMode = UILineBreakModeWordWrap;
+        contextLabel.font = [UIFont systemFontOfSize:[UIFont systemFontSize]];
+        [self.contentView addSubview:contextLabel];
     }
     return self;
 }
@@ -25,5 +41,4 @@
 
     // Configure the view for the selected state
 }
-
 @end

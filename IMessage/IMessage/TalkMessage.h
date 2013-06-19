@@ -18,5 +18,6 @@
 @property (nonatomic, strong) UIImage *toBack;
 @property (nonatomic, strong) NSString *msg;
 @property (nonatomic, strong) NSString *talkTime;
+@property (nonatomic) float height;
 
 @end

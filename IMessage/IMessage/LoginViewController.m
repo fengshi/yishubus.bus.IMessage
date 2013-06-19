@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 #import "IMessageService.h"
 #import "IMessageViewController.h"
+#import "IMessageAppDelegate.h"
 
 @interface LoginViewController ()
 
@@ -43,8 +44,9 @@
     
     IMessageService *service = [[IMessageService alloc] init];
     BOOL isOrno = [service isLogin:mail password:password];
-//    BOOL isOrno = YES;
+
     if (isOrno) {
+        [[self appDelegate] connect];
         IMessageViewController *con = [[IMessageViewController alloc] init];
         self.view.window.rootViewController = con;
     } else {
@@ -57,5 +59,10 @@
 - (IBAction)closeKeybord:(id)sender {
     [self.userTextField resignFirstResponder];
     [self.passTextField resignFirstResponder];
+}
+
+- (IMessageAppDelegate *)appDelegate
+{
+    return (IMessageAppDelegate *)[[UIApplication sharedApplication] delegate];
 }
 @end

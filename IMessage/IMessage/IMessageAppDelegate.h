@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "XMPP.h"
-#import "MessageReceiveDelegate.h"
 
 @interface IMessageAppDelegate : UIResponder <UIApplicationDelegate>
 {
@@ -18,10 +17,11 @@
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) XMPPStream *xmppStream;
-@property (nonatomic, retain) id<MessageReceiveDelegate> messageReceiveDelegate;
+@property (nonatomic, retain) id messageReceiveDelegate;
 
 - (BOOL) connect;
 - (void) disconnect;
 - (void) setupStream;
-
+-(void)goOnline;
+-(void)goOffline;
 @end

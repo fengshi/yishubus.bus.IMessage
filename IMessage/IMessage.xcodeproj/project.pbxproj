@@ -100,6 +100,12 @@
 		8B9446BC17606FDF00171B35 /* FindLevelDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B9446BB17606FDE00171B35 /* FindLevelDetailViewController.xib */; };
 		8B9446BF1761A6B300171B35 /* TeacherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9446BE1761A6B300171B35 /* TeacherViewController.m */; };
 		8B9446C11761A6F700171B35 /* TeacherViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B9446C01761A6F700171B35 /* TeacherViewController.xib */; };
+		8BA2A8F11771980C00145C7E /* bubbleMine.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BA2A8ED1771980B00145C7E /* bubbleMine.png */; };
+		8BA2A8F21771980C00145C7E /* bubbleMine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BA2A8EE1771980B00145C7E /* bubbleMine@2x.png */; };
+		8BA2A8F31771980C00145C7E /* bubbleSomeone.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BA2A8EF1771980B00145C7E /* bubbleSomeone.png */; };
+		8BA2A8F41771980C00145C7E /* bubbleSomeone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BA2A8F01771980C00145C7E /* bubbleSomeone@2x.png */; };
+		8BA2A8FA17719C5900145C7E /* TalkMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BA2A8F917719C5800145C7E /* TalkMessageCell.m */; };
+		8BA2A8FC17719C6F00145C7E /* TalkMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BA2A8FB17719C6E00145C7E /* TalkMessageCell.xib */; };
 		8BA3442D1761BB5C00DC0E53 /* TeacherViewCellController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BA3442C1761BB5C00DC0E53 /* TeacherViewCellController.m */; };
 		8BA3442F1761BBA900DC0E53 /* TeacherViewCellController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BA3442E1761BBA900DC0E53 /* TeacherViewCellController.xib */; };
 		8BA344331762D2D000DC0E53 /* TeacherDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BA344311762D2CF00DC0E53 /* TeacherDetailViewController.m */; };
@@ -282,6 +288,13 @@
 		8B9446BD1761A6B200171B35 /* TeacherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeacherViewController.h; sourceTree = "<group>"; };
 		8B9446BE1761A6B300171B35 /* TeacherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeacherViewController.m; sourceTree = "<group>"; };
 		8B9446C01761A6F700171B35 /* TeacherViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeacherViewController.xib; sourceTree = "<group>"; };
+		8BA2A8ED1771980B00145C7E /* bubbleMine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubbleMine.png; sourceTree = "<group>"; };
+		8BA2A8EE1771980B00145C7E /* bubbleMine@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubbleMine@2x.png"; sourceTree = "<group>"; };
+		8BA2A8EF1771980B00145C7E /* bubbleSomeone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubbleSomeone.png; sourceTree = "<group>"; };
+		8BA2A8F01771980C00145C7E /* bubbleSomeone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubbleSomeone@2x.png"; sourceTree = "<group>"; };
+		8BA2A8F817719C5800145C7E /* TalkMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TalkMessageCell.h; sourceTree = "<group>"; };
+		8BA2A8F917719C5800145C7E /* TalkMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TalkMessageCell.m; sourceTree = "<group>"; };
+		8BA2A8FB17719C6E00145C7E /* TalkMessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TalkMessageCell.xib; sourceTree = "<group>"; };
 		8BA3442B1761BB5C00DC0E53 /* TeacherViewCellController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeacherViewCellController.h; sourceTree = "<group>"; };
 		8BA3442C1761BB5C00DC0E53 /* TeacherViewCellController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeacherViewCellController.m; sourceTree = "<group>"; };
 		8BA3442E1761BBA900DC0E53 /* TeacherViewCellController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeacherViewCellController.xib; sourceTree = "<group>"; };
@@ -413,6 +426,9 @@
 				8B9075FE176EE0A400DB0D3F /* ShowMessageCell.xib */,
 				8BA452A5177061DE00A78AEC /* ShowMessageTableController.h */,
 				8BA452A6177061DE00A78AEC /* ShowMessageTableController.m */,
+				8BA2A8F817719C5800145C7E /* TalkMessageCell.h */,
+				8BA2A8F917719C5800145C7E /* TalkMessageCell.m */,
+				8BA2A8FB17719C6E00145C7E /* TalkMessageCell.xib */,
 			);
 			path = IMessage;
 			sourceTree = "<group>";
@@ -420,6 +436,10 @@
 		8B1D0D121757550C00A17375 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8BA2A8ED1771980B00145C7E /* bubbleMine.png */,
+				8BA2A8EE1771980B00145C7E /* bubbleMine@2x.png */,
+				8BA2A8EF1771980B00145C7E /* bubbleSomeone.png */,
+				8BA2A8F01771980C00145C7E /* bubbleSomeone@2x.png */,
 				8B1D0E1017575EDB00A17375 /* bar1.png */,
 				8B1D0E1117575EDB00A17375 /* bar1@2x.png */,
 				8B1D0D131757550C00A17375 /* IMessage-Info.plist */,
@@ -816,6 +836,11 @@
 				8BA344341762D2D000DC0E53 /* TeacherDetailViewController.xib in Resources */,
 				8BA3443B17631F3700DC0E53 /* TalkMessageViewController.xib in Resources */,
 				8B9075FF176EE0A400DB0D3F /* ShowMessageCell.xib in Resources */,
+				8BA2A8F11771980C00145C7E /* bubbleMine.png in Resources */,
+				8BA2A8F21771980C00145C7E /* bubbleMine@2x.png in Resources */,
+				8BA2A8F31771980C00145C7E /* bubbleSomeone.png in Resources */,
+				8BA2A8F41771980C00145C7E /* bubbleSomeone@2x.png in Resources */,
+				8BA2A8FC17719C6F00145C7E /* TalkMessageCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -894,6 +919,7 @@
 				8BA3443E176327D800DC0E53 /* TalkMessage.m in Sources */,
 				8B9075FD176EE07C00DB0D3F /* ShowMessageCell.m in Sources */,
 				8BA452A7177061DE00A78AEC /* ShowMessageTableController.m in Sources */,
+				8BA2A8FA17719C5900145C7E /* TalkMessageCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -936,7 +962,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -960,7 +986,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

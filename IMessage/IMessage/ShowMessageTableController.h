@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MessageReceiveDelegate.h"
 
-@interface ShowMessageTableController : UITableViewController
+@interface ShowMessageTableController : UITableViewController<MessageReceiveDelegate>
 
 @property (strong, nonatomic) NSMutableArray *messageArray;
 

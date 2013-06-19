@@ -9,6 +9,7 @@
 #import "SqliteData.h"
 #import "Constants.h"
 #import "AddressBook.h"
+#import "TalkMessage.h"
 
 @implementation SqliteData
 @synthesize db = _db;
@@ -223,6 +224,38 @@
             }
             sqlite3_finalize(statement);
         }
+        [self close];
+    }
+    return result;
+}
+
+- (NSMutableArray *) friendAllMessages:(NSString *)uid
+{
+    NSMutableArray *result = [[NSMutableArray alloc] init];
+    if ([self open]) {
+        NSString *mid = [[NSUserDefaults standardUserDefaults] objectForKey:@"id"];
+        NSString *sql = @"select fid,tid,msg,talktime from message where mid = ? and userid = ? order by id";
+        sqlite3_stmt *statement;
+        if (sqlite3_prepare_v2(db, [sql UTF8String], -1, &statement, nil) == SQLITE_OK) {
+            sqlite3_bind_text(statement, 1, [mid UTF8String], -1, nil);
+            sqlite3_bind_text(statement, 2, [uid UTF8String], -1, nil);
+                
+            while (sqlite3_step(statement) == SQLITE_ROW) {
+                NSString *fid = [[NSString alloc] initWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                NSString *tid = [[NSString alloc] initWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+                NSString *msg = [[NSString alloc] initWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+                NSString *time = [[NSString alloc] initWithUTF8String:(char *) sqlite3_column_text(statement, 3)];
+                
+                TalkMessage *talk = [[TalkMessage alloc] init];
+                talk.from = fid;
+                talk.to = tid;
+                talk.talkTime = time;
+                talk.msg = msg;
+                
+                [result addObject:talk];
+            }
+        }
+        sqlite3_finalize(statement);
         [self close];
     }
     return result;

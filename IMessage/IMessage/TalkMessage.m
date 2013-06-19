@@ -17,5 +17,6 @@
 @synthesize toBack = _toBack;
 @synthesize msg = _msg;
 @synthesize talkTime = _talkTime;
+@synthesize height = _height;
 
 @end
