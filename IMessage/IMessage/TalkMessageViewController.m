@@ -63,7 +63,7 @@
 //    
 //    self.tView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-tab-fiel-nav) style:UITableViewStylePlain];
 //    [self.view addSubview:tView];
-    
+
     self.tView.delegate = self;
     self.tView.dataSource = self;
     self.tView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -94,14 +94,19 @@
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField
 {
+    [self shouldDownField];
+    [textField resignFirstResponder];
+    return YES;
+}
+
+- (void) shouldDownField
+{
     NSTimeInterval animationDuration = 0.3f;
     [UIView beginAnimations:@"closeKeyboard" context:nil];
     [UIView setAnimationDuration:animationDuration];
     CGRect rect = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
     self.view.frame = rect;
     [UIView commitAnimations];
-    [textField resignFirstResponder];
-    return YES;
 }
 
 - (void)didReceiveMemoryWarning
@@ -205,16 +210,12 @@
     }
     
     self.myTextField.text = @"";
+    [self shouldDownField];
+    [self.myTextField resignFirstResponder];
 }
 
 - (IBAction)closeKeyClickBack:(id)sender {
-    
-    NSTimeInterval animationDuration = 0.3f;
-    [UIView beginAnimations:@"closeKeyboard" context:nil];
-    [UIView setAnimationDuration:animationDuration];
-    CGRect rect = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-    self.view.frame = rect;
-    [UIView commitAnimations];
+    [self shouldDownField];
     [self.myTextField resignFirstResponder];
 }
 

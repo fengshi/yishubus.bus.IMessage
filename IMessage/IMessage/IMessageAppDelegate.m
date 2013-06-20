@@ -138,7 +138,6 @@
     [dict setObject:msg forKey:@"msg"];
     [dict setObject:[[from componentsSeparatedByString:@"@"] objectAtIndex:0] forKey:@"sender"];
     [dict setObject:[IMessageService getCurrentTime] forKey:@"time"];
-    NSLog(@"%@",msg);
     
     SqliteData *util = [[SqliteData alloc] init];
     
