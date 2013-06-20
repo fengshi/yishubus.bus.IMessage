@@ -194,11 +194,10 @@
         for (int i=0; i<result.count; i++) {
             NSMutableDictionary *friendMessageDirectionary = [result objectAtIndex:i];
             NSString *userid = [friendMessageDirectionary objectForKey:@"userid"];
-            sql = @"select count(*) from message where mid = ? and userid = ? and isload = ?";
+            sql = @"select count(*) from message where mid = ? and userid = ? and isload = 1";
             if (sqlite3_prepare_v2(db, [sql UTF8String], -1, &statement, nil) == SQLITE_OK) {
                 sqlite3_bind_text(statement, 1, [mid UTF8String], -1, nil);
                 sqlite3_bind_text(statement, 2, [userid UTF8String], -1, nil);
-                sqlite3_bind_int(statement, 3, 1);
                 
                 while (sqlite3_step(statement) == SQLITE_ROW) {
                     int unloadNumber = sqlite3_column_int(statement, 0);

@@ -13,6 +13,9 @@
 #import "IMessageService.h"
 #import "SqliteData.h"
 #import "MessageReceiveDelegate.h"
+#import "RequestURL.h"
+#import "AddressBook.h"
+#import "NetWorkData.h"
 
 @implementation IMessageAppDelegate
 @synthesize xmppStream;
@@ -135,7 +138,17 @@
     [dict setObject:msg forKey:@"msg"];
     [dict setObject:[[from componentsSeparatedByString:@"@"] objectAtIndex:0] forKey:@"sender"];
     [dict setObject:[IMessageService getCurrentTime] forKey:@"time"];
+    NSLog(@"%@",msg);
     
+    SqliteData *util = [[SqliteData alloc] init];
+    
+    // -- 判断此联系人是否在通讯录中,如果不在,则加为好友
+    BOOL isfriend = [util isFriend:[[from componentsSeparatedByString:@"@"] objectAtIndex:0]];
+    if (!isfriend) {
+        NSString *stringUrl = [RequestURL getUrlByKey:USER_DETAIL_URL];
+        AddressBook *book = [NetWorkData userDetail:stringUrl userId:[[from componentsSeparatedByString:@"@"]objectAtIndex:0]];
+        [util addFriend:book];
+    }
     // -- 消息委托
     [messageReceiveDelegate messageReceive:dict];
 }

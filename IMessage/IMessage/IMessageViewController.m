@@ -41,7 +41,6 @@
             self.tabBarController = [[UITabBarController alloc] init];
             [self.tabBarController.view setFrame:self.view.bounds];
             
-//            ShowMessageViewController *messageController = [[ShowMessageViewController alloc] initWithStyle:UITableViewStylePlain];
             ShowMessageTableController *messageController = [[ShowMessageTableController alloc] initWithStyle:UITableViewStylePlain];
             UINavigationController *messageNav = [[UINavigationController alloc] initWithRootViewController:messageController];
             messageNav.navigationBar.tintColor = [UIColor colorWithRed:50/255.0 green:50/255.0 blue:50/255.0 alpha:0];
@@ -57,7 +56,7 @@
             IMSettingViewController *settingController = [[IMSettingViewController alloc] initWithNibName:@"IMSettingViewController" bundle:nil];
             UINavigationController *settingNav = [[UINavigationController alloc] initWithRootViewController:settingController];
             settingNav.navigationBar.tintColor = [UIColor colorWithRed:50/255.0 green:50/255.0 blue:50/255.0 alpha:0];
-                
+            
             self.tabBarController.viewControllers = [NSArray arrayWithObjects:messageNav,bookNav,levelNav,settingNav, nil];
                 
             [self.view addSubview:self.tabBarController.view];

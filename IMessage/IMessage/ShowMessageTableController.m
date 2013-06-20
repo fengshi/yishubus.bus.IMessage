@@ -11,6 +11,8 @@
 #import "ShowMessageCell.h"
 #import "TalkMessageViewController.h"
 #import "IMessageAppDelegate.h"
+#import "SqliteData.h"
+
 
 @interface ShowMessageTableController ()
 
@@ -33,27 +35,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    IMessageAppDelegate *appDelegate = [self appDelegate];
-//    appDelegate.messageReceiveDelegate = self;
-//    [self loadArrays];
+    IMessageAppDelegate *appDelegate = [self appDelegate];
+    appDelegate.messageReceiveDelegate = self;
 }
 
 - (void) loadArrays
 {
-    dispatch_queue_t downloadArray = dispatch_queue_create("mainArray", nil);
-    dispatch_async(downloadArray, ^{
-        IMessageService *util = [[IMessageService alloc] init];
-        self.messageArray = [util showMessageInitLoadFriends];
-
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadData];
-        });
-    });
-}
-
-- (void) viewWillAppear:(BOOL)animated
-{
-    dispatch_queue_t downloadArray = dispatch_queue_create("mainArray", nil);
+    dispatch_queue_t downloadArray = dispatch_queue_create("mainArray2", nil);
     dispatch_async(downloadArray, ^{
         IMessageService *util = [[IMessageService alloc] init];
         self.messageArray = [util showMessageInitLoadFriends];
@@ -62,6 +50,11 @@
             [self.tableView reloadData];
         });
     });
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [self loadArrays];
 }
 
 - (void)didReceiveMemoryWarning
@@ -134,7 +127,14 @@
 
 - (void) messageReceive:(NSDictionary *)messageContent
 {
+    NSString *fid = [messageContent objectForKey:@"sender"];
+    NSString *mid = [[NSUserDefaults standardUserDefaults] objectForKey:@"id"];
+    NSString *talkTime = [IMessageService getCurrentTime];
+    SqliteData *util = [[SqliteData alloc] init];
     
+    [util addMessage:mid fromid:fid toid:mid talkMessage:[messageContent objectForKey:@"msg"] talkTime:talkTime load:1 userid:fid];
+    
+    [self loadArrays];
 }
 
 - (IMessageAppDelegate *) appDelegate

@@ -67,7 +67,17 @@
     for (int i = 0; i < array.count; i++) {
         NSMutableDictionary *directionary = [array objectAtIndex:i];
         NSString *userid = [directionary objectForKey:@"userid"];
-        AddressBook *book = [util getFriend:userid];
+        // -- 判断此联系人是否在通讯录中,如果不在,则加为好友
+        BOOL isfriend = [util isFriend:userid];
+        AddressBook *book = [[AddressBook alloc]init];
+        if (!isfriend) {
+            NSString *stringUrl = [RequestURL getUrlByKey:USER_DETAIL_URL];
+            book = [NetWorkData userDetail:stringUrl userId:userid];
+            [util addFriend:book];
+        } else {
+            book = [util getFriend:userid];
+        }
+
         [directionary setObject:book.head forKey:@"head"];
         [directionary setObject:book.name forKey:@"name"];
     }

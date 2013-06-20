@@ -49,7 +49,6 @@
     
     messageArray = [util friendAllMessages:chatWithUser];
     [self.tView reloadData];
-    
     [util updateFriendIsLoad:chatWithUser];
     
 }
@@ -58,13 +57,12 @@
 {
     [super viewDidLoad];
 
-    CGFloat tab = self.tabBarController.tabBar.frame.size.height;
-    CGFloat fiel = self.myTextField.frame.size.height;
-    CGFloat nav = self.navigationController.navigationBar.frame.size.height;
-    
-    self.tView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-tab-fiel-nav) style:UITableViewStylePlain];
-    //    self.tView.frame = CGRectMake(0, 0, self.view.frame.size.width, 115);
-    [self.view addSubview:tView];
+//    CGFloat tab = self.tabBarController.tabBar.frame.size.height;
+//    CGFloat fiel = self.myTextField.frame.size.height;
+//    CGFloat nav = self.navigationController.navigationBar.frame.size.height;
+//    
+//    self.tView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-tab-fiel-nav) style:UITableViewStylePlain];
+//    [self.view addSubview:tView];
     
     self.tView.delegate = self;
     self.tView.dataSource = self;
@@ -140,7 +138,7 @@
     cell.contextLabel.text = talk.msg;
     cell.userInteractionEnabled = NO;
     UIImage *bgImage = nil;
-    if ([talk.from isEqualToString:mid]) {
+    if (![talk.from isEqualToString:mid]) {
         bgImage = [[UIImage imageNamed:@"bubblesomeone.png"] stretchableImageWithLeftCapWidth:20 topCapHeight:15];
         [cell.contextLabel setFrame:CGRectMake(20, 40, size.width, size.height)];
         [cell.bubImage setFrame:CGRectMake(cell.contextLabel.frame.origin.x - 20, cell.contextLabel.frame.origin.y - 10, size.width + 50, size.height + 25)];
@@ -156,7 +154,12 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 84;
+    TalkMessage *talk = [messageArray objectAtIndex:[indexPath row]];
+    CGSize textSize = {220,9999};
+    CGSize size = [talk.msg sizeWithFont:[UIFont systemFontOfSize:[UIFont systemFontSize]] constrainedToSize:textSize lineBreakMode:UILineBreakModeWordWrap];
+    size.height += 40;
+    CGFloat height = size.height < 70 ? 70 : size.height;
+    return height;
 }
 
 - (IBAction)clickMessage:(id)sender {
@@ -191,7 +194,7 @@
         talk.talkTime = [IMessageService getCurrentTime];
         [messageArray addObject:talk];
         [self.tView reloadData];
-        
+        [self moveEndRoll];
         // -- add server message
         dispatch_queue_t queuemessage = dispatch_queue_create("queuemessage", nil);
         dispatch_async(queuemessage, ^{
@@ -202,6 +205,17 @@
     }
     
     self.myTextField.text = @"";
+}
+
+- (IBAction)closeKeyClickBack:(id)sender {
+    
+    NSTimeInterval animationDuration = 0.3f;
+    [UIView beginAnimations:@"closeKeyboard" context:nil];
+    [UIView setAnimationDuration:animationDuration];
+    CGRect rect = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+    self.view.frame = rect;
+    [UIView commitAnimations];
+    [self.myTextField resignFirstResponder];
 }
 
 - (void) messageReceive:(NSDictionary *)messageContent
@@ -219,8 +233,24 @@
     talk.to = mid;
     talk.msg = [messageContent objectForKey:@"msg"];
     talk.talkTime = talkTime;
+    
     [messageArray addObject:talk];
     [self.tView reloadData];
+    [self moveEndRoll];
+}
+
+- (void) moveEndRoll {
+    NSInteger s = [self.tView numberOfSections];
+    if (s < 1) {
+        return;
+    }
+    
+    NSInteger r = [self.tView numberOfRowsInSection:s - 1];
+    if (r < 1) {
+        return;
+    }
+    NSIndexPath *path = [NSIndexPath indexPathForRow:r - 1 inSection:s - 1];
+    [self.tView scrollToRowAtIndexPath:path atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
 - (IMessageAppDelegate *) appDelegate
@@ -233,4 +263,8 @@
     return [[self appDelegate] xmppStream];
 }
 
+- (void)viewDidUnload {
+    [self setTView:nil];
+    [super viewDidUnload];
+}
 @end

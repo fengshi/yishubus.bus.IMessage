@@ -11,12 +11,14 @@
 
 @interface TalkMessageViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,MessageReceiveDelegate,UITextFieldDelegate>
 
-@property (strong, nonatomic) UITableView *tView;
+//@property (strong, nonatomic) UITableView *tView;
+@property (strong, nonatomic) IBOutlet UITableView *tView;
 
 @property (strong, nonatomic) IBOutlet UITextField *myTextField;
 
 -(void) setChatWithUser:(NSString *)userid;
 
 - (IBAction)clickMessage:(id)sender;
+- (IBAction)closeKeyClickBack:(id)sender;
 
 @end
