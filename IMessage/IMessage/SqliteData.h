@@ -27,4 +27,6 @@
 - (BOOL) updateFriendIsLoad:(NSString *)uid;
 - (void) addMessage:(NSString *)mid fromid:(NSString *)fid toid:(NSString *)tid talkMessage:(NSString *)msg talkTime:(NSString *)time load:(int)isload userid:(NSString *)userid;
 - (NSMutableArray *) friendAllMessages:(NSString *)uid;
+- (BOOL) deleteFriendMessages:(NSString *)uid;
+
 @end

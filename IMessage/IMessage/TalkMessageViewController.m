@@ -134,6 +134,9 @@
     if (cell == nil) {
         cell = [[TalkMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
+    UIView *backView = [[UIView alloc] initWithFrame:cell.frame];
+    cell.selectedBackgroundView = backView;
+    cell.selectedBackgroundView.backgroundColor = [UIColor clearColor];
     
     TalkMessage *talk = [messageArray objectAtIndex:[indexPath row]];
     
@@ -141,7 +144,8 @@
     CGSize size = [talk.msg sizeWithFont:[UIFont systemFontOfSize:[UIFont systemFontSize]] constrainedToSize:textSize lineBreakMode:UILineBreakModeWordWrap];
     cell.headerLabel.text = talk.talkTime;
     cell.contextLabel.text = talk.msg;
-    cell.userInteractionEnabled = NO;
+//    cell.userInteractionEnabled = NO;
+    
     UIImage *bgImage = nil;
     if (![talk.from isEqualToString:mid]) {
         bgImage = [[UIImage imageNamed:@"bubblesomeone.png"] stretchableImageWithLeftCapWidth:20 topCapHeight:15];
@@ -165,6 +169,12 @@
     size.height += 40;
     CGFloat height = size.height < 70 ? 70 : size.height;
     return height;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self shouldDownField];
+    [self.myTextField resignFirstResponder];
 }
 
 - (IBAction)clickMessage:(id)sender {

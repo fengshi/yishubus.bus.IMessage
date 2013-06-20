@@ -275,6 +275,21 @@
     return NO;
 }
 
+- (BOOL) deleteFriendMessages:(NSString *)uid
+{
+    if ([self open]) {
+        char *errormsg;
+        NSString *mid = [[NSUserDefaults standardUserDefaults] objectForKey:@"id"];
+        NSString *sql = [NSString stringWithFormat:@"delete from message where mid = '%@' and userid = '%@'",mid,uid];
+        if (sqlite3_exec(db, [sql UTF8String], nil, nil, &errormsg) == SQLITE_OK) {
+            [self close];
+            return YES;
+        }
+        [self close];
+    }
+    return NO;
+}
+
 - (void) removeSqlite
 {
     if ([self open]) {
