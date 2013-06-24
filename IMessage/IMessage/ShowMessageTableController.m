@@ -12,10 +12,13 @@
 #import "TalkMessageViewController.h"
 #import "IMessageAppDelegate.h"
 #import "SqliteData.h"
+#import <AudioToolbox/AudioToolbox.h>
 
 
 @interface ShowMessageTableController ()
-
+{
+    SystemSoundID soundID;
+}
 @end
 
 @implementation ShowMessageTableController
@@ -37,6 +40,9 @@
     [super viewDidLoad];
     IMessageAppDelegate *appDelegate = [self appDelegate];
     appDelegate.messageReceiveDelegate = self;
+    
+    NSURL *musicPath = [[NSBundle mainBundle] URLForResource:@"1712" withExtension:@"wav"];
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef)musicPath, &soundID);
 }
 
 - (void) loadArrays
@@ -45,8 +51,16 @@
     dispatch_async(downloadArray, ^{
         IMessageService *util = [[IMessageService alloc] init];
         self.messageArray = [util showMessageInitLoadFriends];
-        
+
         dispatch_async(dispatch_get_main_queue(), ^{
+            for (int i=0; i<self.messageArray.count; i++) {
+                NSMutableDictionary *dd = [self.messageArray objectAtIndex:i];
+                NSNumber *unload = [dd objectForKey:@"unload"];
+                if (unload.intValue > 0) {
+                    AudioServicesPlaySystemSound(soundID);
+                    break;
+                }
+            }
             [self.tableView reloadData];
         });
     });

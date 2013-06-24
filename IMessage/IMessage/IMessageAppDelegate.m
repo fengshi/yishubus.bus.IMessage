@@ -148,6 +148,7 @@
         AddressBook *book = [NetWorkData userDetail:stringUrl userId:[[from componentsSeparatedByString:@"@"]objectAtIndex:0]];
         [util addFriend:book];
     }
+    
     // -- 消息委托
     [messageReceiveDelegate messageReceive:dict];
 }
