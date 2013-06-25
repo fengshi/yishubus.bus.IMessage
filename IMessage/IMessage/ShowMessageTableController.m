@@ -41,7 +41,7 @@
     IMessageAppDelegate *appDelegate = [self appDelegate];
     appDelegate.messageReceiveDelegate = self;
     
-    NSURL *musicPath = [[NSBundle mainBundle] URLForResource:@"1712" withExtension:@"wav"];
+    NSURL *musicPath = [[NSBundle mainBundle] URLForResource:@"1317" withExtension:@"wav"];
     AudioServicesCreateSystemSoundID((__bridge CFURLRef)musicPath, &soundID);
 }
 

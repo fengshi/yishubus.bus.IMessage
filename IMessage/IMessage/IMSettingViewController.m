@@ -34,7 +34,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    array = [[NSArray alloc] initWithObjects:@"第一个",@"第二个",@"第三个",@"第四个", nil];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *mail = [defaults objectForKey:@"mail"];
+    NSString *name = [defaults objectForKey:@"nickName"];
+    UIImage *head = [UIImage imageWithData:[defaults objectForKey:@"headPhoto"]];
+    array = [[NSArray alloc] initWithObjects:[NSString stringWithFormat:@"妮称:%@",name],[NSString stringWithFormat:@"用户名:%@",mail], nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -72,6 +76,7 @@
         [button addTarget:self action:@selector(buttonClick) forControlEvents:UIControlEventTouchUpInside];
         [cell.contentView addSubview:button];
     } else {
+        cell.userInteractionEnabled = NO;
         cell.textLabel.text = [array objectAtIndex:[indexPath row]];
     }
     return cell;

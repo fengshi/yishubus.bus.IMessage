@@ -172,6 +172,52 @@
     return friend;
 }
 
+- (NSMutableArray *) myFriends
+{
+    NSMutableArray *friends = [[NSMutableArray alloc] init];
+    if ([self open]) {
+        NSString *mid = [[NSUserDefaults standardUserDefaults] objectForKey:@"id"];
+        NSString *sql = @"select * from addressbook where mid = ?";
+        sqlite3_stmt *statement;
+        if (sqlite3_prepare_v2(db, [sql UTF8String], -1, &statement, nil) == SQLITE_OK) {
+            sqlite3_bind_text(statement, 1, [mid UTF8String], -1, nil);
+            
+            while (sqlite3_step(statement) == SQLITE_ROW) {
+                AddressBook *friend = [[AddressBook alloc] init];
+                NSString *code = [[NSString alloc] initWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+                NSString *name = [[NSString alloc] initWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+                int type = sqlite3_column_int(statement, 3);
+                NSString *label = [[NSString alloc] initWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
+                int headBytes = sqlite3_column_bytes(statement, 5);
+                NSData *head = [NSData dataWithBytes:sqlite3_column_blob(statement, 5) length:headBytes];
+                UIImage *headImage = [UIImage imageWithData:head];
+                NSString *area = [[NSString alloc] initWithUTF8String:(char *)sqlite3_column_text(statement, 6)];
+                NSString *uid = [[NSString alloc] initWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
+                NSString *school = [[NSString alloc] initWithUTF8String:(char *)sqlite3_column_text(statement, 8)];
+                NSString *info = [[NSString alloc] initWithUTF8String:(char *)sqlite3_column_text(statement, 9)];
+                NSString *tutorway = [[NSString alloc] initWithUTF8String:(char *)sqlite3_column_text(statement, 10)];
+                NSString *edutag = [[NSString alloc] initWithUTF8String:(char *)sqlite3_column_text(statement, 11)];
+                
+                friend.code = code;
+                friend.name = name;
+                friend.head = headImage;
+                friend.label = label;
+                friend.type = type;
+                friend.area = area;
+                friend.userId = uid;
+                friend.school = school;
+                friend.info = info;
+                friend.tutorWay = tutorway;
+                friend.eduTag = edutag;
+                [friends addObject:friend];
+            }
+        }
+        sqlite3_finalize(statement);
+        [self close];
+    }
+    return friends;
+}
+
 - (NSMutableArray *) bookMessage
 {
     NSMutableArray *result = [[NSMutableArray alloc] init];

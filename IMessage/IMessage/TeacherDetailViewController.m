@@ -71,7 +71,7 @@
             self.typeLabel.text = teacher.label;
             self.tutorWay.text = teacher.tutorWay;
             self.info.text = teacher.info;
-            self.code.text = teacher.code;
+
             [DejalBezelActivityView removeView];
         });
     });
