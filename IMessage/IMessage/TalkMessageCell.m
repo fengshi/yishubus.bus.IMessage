@@ -19,7 +19,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 300, 20)];
-        headerLabel.textAlignment = UITextAlignmentCenter;
+        headerLabel.textAlignment = NSTextAlignmentCenter;
         headerLabel.font = [UIFont systemFontOfSize:[UIFont systemFontSize]];
         [self.contentView addSubview:headerLabel];
         
@@ -28,7 +28,7 @@
         
         contextLabel = [[UILabel alloc] init];
         contextLabel.backgroundColor = [UIColor clearColor];
-        contextLabel.lineBreakMode = UILineBreakModeWordWrap;
+        contextLabel.lineBreakMode = NSLineBreakByWordWrapping;
         contextLabel.font = [UIFont systemFontOfSize:[UIFont systemFontSize]];
         [self.contentView addSubview:contextLabel];
     }

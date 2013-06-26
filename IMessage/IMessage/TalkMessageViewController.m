@@ -141,7 +141,7 @@
     TalkMessage *talk = [messageArray objectAtIndex:[indexPath row]];
     
     CGSize textSize = {220,9999};
-    CGSize size = [talk.msg sizeWithFont:[UIFont systemFontOfSize:[UIFont systemFontSize]] constrainedToSize:textSize lineBreakMode:UILineBreakModeWordWrap];
+    CGSize size = [talk.msg sizeWithFont:[UIFont systemFontOfSize:[UIFont systemFontSize]] constrainedToSize:textSize lineBreakMode:NSLineBreakByWordWrapping];
     cell.headerLabel.text = talk.talkTime;
     cell.contextLabel.text = talk.msg;
 //    cell.userInteractionEnabled = NO;
@@ -165,7 +165,7 @@
 {
     TalkMessage *talk = [messageArray objectAtIndex:[indexPath row]];
     CGSize textSize = {220,9999};
-    CGSize size = [talk.msg sizeWithFont:[UIFont systemFontOfSize:[UIFont systemFontSize]] constrainedToSize:textSize lineBreakMode:UILineBreakModeWordWrap];
+    CGSize size = [talk.msg sizeWithFont:[UIFont systemFontOfSize:[UIFont systemFontSize]] constrainedToSize:textSize lineBreakMode:NSLineBreakByWordWrapping];
     size.height += 40;
     CGFloat height = size.height < 70 ? 70 : size.height;
     return height;
