@@ -12,9 +12,9 @@ typedef enum _NSUserType
     UserTypeUser = 1
 } NSUserType;
 
-#define OPEN_FILE_SERVER @"@yishubus-pc"
-#define ACTION_MAIN      @"http://192.168.0.104:7878/"
-#define XMPP_MAIN        @"192.168.0.104"
+#define OPEN_FILE_SERVER @"@yishubus"
+#define ACTION_MAIN      @"http://www.yishubus.com/"
+#define XMPP_MAIN        @"www.yishubus.com"
 #define DB_NAME          @"message.sqlite"
 
 #define LOGIN_URL        1

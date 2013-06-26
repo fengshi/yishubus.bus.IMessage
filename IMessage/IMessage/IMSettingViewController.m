@@ -25,7 +25,7 @@
     if (self) {
         self.navigationItem.title = @"设置";
         UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"设置" image:nil tag:0];
-        [item setFinishedSelectedImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"bar1" ofType:@"png"]] withFinishedUnselectedImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"bar1" ofType:@"png"]]];
+        [item setFinishedSelectedImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"bar4_2" ofType:@"png"]] withFinishedUnselectedImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"bar4_1" ofType:@"png"]]];
         self.tabBarItem = item;
     }
     return self;

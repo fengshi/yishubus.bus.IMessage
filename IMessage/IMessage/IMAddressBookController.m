@@ -26,7 +26,7 @@
     if (self) {
         self.navigationItem.title = @"通讯录";
         UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"通讯录" image:nil tag:0];
-        [item setFinishedSelectedImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"bar1" ofType:@"png"]] withFinishedUnselectedImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"bar1" ofType:@"png"]]];
+        [item setFinishedSelectedImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"bar2_2" ofType:@"png"]] withFinishedUnselectedImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"bar2_1" ofType:@"png"]]];
         self.tabBarItem = item;
     }
     return self;
@@ -87,7 +87,7 @@
     AddressBook *teacher = [datas objectAtIndex:indexPath.row];
     TeacherDetailViewController *teacherDetail = [[TeacherDetailViewController alloc] init];
     [teacherDetail initDraw:teacher.userId];
-    
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     [self.navigationController pushViewController:teacherDetail animated:YES];
 }
 @end

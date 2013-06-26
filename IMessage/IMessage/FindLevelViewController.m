@@ -28,7 +28,7 @@
     if (self) {
         self.navigationItem.title = @"找老师";
         UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:@"找老师" image:nil tag:0];
-        [item setFinishedSelectedImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"bar1" ofType:@"png"]] withFinishedUnselectedImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"bar1" ofType:@"png"]]];
+        [item setFinishedSelectedImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"bar3_2" ofType:@"png"]] withFinishedUnselectedImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"bar3_1" ofType:@"png"]]];
         self.tabBarItem = item;
     }
     return self;
