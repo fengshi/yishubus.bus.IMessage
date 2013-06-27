@@ -22,3 +22,4 @@ typedef enum _NSUserType
 #define TEACHER_URL      3
 #define USER_DETAIL_URL  4
 #define SAVE_MESSAGE     5
+#define FRIENDS_LIST     6

@@ -83,4 +83,19 @@
     }
     return array;
 }
+
+- (void)loginAddMyFriends
+{
+    NSString *mid = [[NSUserDefaults standardUserDefaults] objectForKey:@"id"];
+    NSMutableArray *array = [NetWorkData getMyFriends:[RequestURL getUrlByKey:FRIENDS_LIST] mId:mid];
+    SqliteData *util = [[SqliteData alloc] init];
+    
+    for (int i = 0; i < array.count; i++) {
+        NSString *userId = [array objectAtIndex:i];
+        if (![util isFriend:userId]) {
+            AddressBook *book = [NetWorkData userDetail:[RequestURL getUrlByKey:USER_DETAIL_URL] userId:userId];
+            [util addFriend:book];
+        }
+    }
+}
 @end

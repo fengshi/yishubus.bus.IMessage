@@ -38,7 +38,7 @@
     NSString *mail = [defaults objectForKey:@"mail"];
     NSString *name = [defaults objectForKey:@"nickName"];
     UIImage *head = [UIImage imageWithData:[defaults objectForKey:@"headPhoto"]];
-    array = [[NSArray alloc] initWithObjects:[NSString stringWithFormat:@"妮称:%@",name],[NSString stringWithFormat:@"用户名:%@",mail], nil];
+    array = [[NSArray alloc] initWithObjects:[NSString stringWithFormat:@"昵称:%@",name],[NSString stringWithFormat:@"用户名:%@",mail], nil];
 }
 
 - (void)didReceiveMemoryWarning

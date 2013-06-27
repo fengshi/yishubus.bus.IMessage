@@ -15,4 +15,5 @@
 - (void) removeLoginMessage;
 - (BOOL) isLogin:(NSString *)email password:(NSString *)pass;
 - (NSMutableArray *) showMessageInitLoadFriends;
+- (void)loginAddMyFriends;
 @end

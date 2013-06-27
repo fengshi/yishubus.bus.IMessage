@@ -200,4 +200,25 @@
 //        NSLog(@"%@",jsonRequest);
     }
 }
+
++ (NSMutableArray *) getMyFriends:(NSString *)dataUrl mId:(NSString *)mid
+{
+    NSString *stringUrl = [NSString stringWithFormat:@"&id=%d",[mid intValue]];
+    NSURL *url = [NSURL URLWithString:[dataUrl stringByAppendingString:stringUrl]];
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    [request startSynchronous];
+    NSMutableArray *friendIds = [[NSMutableArray alloc]init];
+    NSError *error = [request error];
+    if (!error) {
+        NSString *jsonResult = [request responseString];
+        NSArray *array = [jsonResult objectFromJSONString];
+        for (int i = 0; i < array.count; i++) {
+            NSDictionary *dictionary = [array objectAtIndex:i];
+            NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+            NSString *nid = [formatter stringFromNumber:[dictionary objectForKey:@"id"]];
+            [friendIds addObject:nid];
+        }
+    }
+    return friendIds;
+}
 @end

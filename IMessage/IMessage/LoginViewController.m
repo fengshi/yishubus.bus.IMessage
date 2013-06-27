@@ -10,6 +10,7 @@
 #import "IMessageService.h"
 #import "IMessageViewController.h"
 #import "IMessageAppDelegate.h"
+#import "IMessageService.h"
 
 @interface LoginViewController ()
 
@@ -46,6 +47,9 @@
     BOOL isOrno = [service isLogin:mail password:password];
 
     if (isOrno) {
+        IMessageService *service = [[IMessageService alloc] init];
+        [service loginAddMyFriends];
+        
         [[self appDelegate] connect];
         IMessageViewController *con = [[IMessageViewController alloc] init];
         self.view.window.rootViewController = con;
