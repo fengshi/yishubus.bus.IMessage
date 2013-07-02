@@ -37,7 +37,21 @@
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    
+    startImageView = [[UIImageView alloc] initWithFrame:self.window.frame];
+    startImageView.image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Default" ofType:@"png"]];
+    
+    [self.window addSubview:startImageView];
+    [self performSelector:@selector(theAnimation) withObject:nil afterDelay:3];
+    
     return YES;
+}
+
+- (void) theAnimation
+{
+    [UIView animateWithDuration:1.0 animations:^{
+        startImageView.frame = CGRectMake(self.window.frame.origin.x, self.window.frame.size.height, -self.window.frame.size.width, -self.window.frame.size.height);
+    }];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

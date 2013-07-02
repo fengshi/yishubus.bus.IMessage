@@ -13,6 +13,7 @@
 {
     XMPPStream *xmppStream;
     BOOL isOpenStream;
+    UIImageView *startImageView;
 }
 
 @property (strong, nonatomic) UIWindow *window;
