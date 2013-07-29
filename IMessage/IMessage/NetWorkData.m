@@ -156,6 +156,7 @@
         NSString *eduTag = [dictionary objectForKey:@"eduTag"];
         NSArray *imageUrls = [dictionary objectForKey:@"urls"];
         NSArray *awards = [dictionary objectForKey:@"awards"];
+        NSString *phone = [dictionary objectForKey:@"phone"];
         
         book.userId = uid;
         book.name = nickName;
@@ -168,6 +169,7 @@
         book.school = school;
         book.info = info;
         book.awards = [[NSMutableArray alloc] initWithArray:awards];
+        book.phone = phone;
         
         NSMutableArray *bookPics = [[NSMutableArray alloc] init];
         

@@ -24,6 +24,8 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *info;
 
+@property (strong, nonatomic) IBOutlet UIButton *phoneButton;
+
 - (IBAction)sendMessage:(id)sender;
 
 - (void) initDraw: (NSString *)uid;

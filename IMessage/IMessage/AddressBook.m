@@ -23,5 +23,6 @@
 @synthesize pics = _pics;
 @synthesize awards = _awards;
 @synthesize eduTag = _eduTag;
+@synthesize phone = _phone;
 
 @end

@@ -25,5 +25,6 @@
 @property (nonatomic, strong) NSMutableArray *pics; // -- 图片集合
 @property (nonatomic, strong) NSMutableArray *awards; // -- 荣誉集合
 @property (nonatomic, strong) NSString *eduTag;   // -- 教学对象
+@property (nonatomic, strong) NSString *phone;
 
 @end

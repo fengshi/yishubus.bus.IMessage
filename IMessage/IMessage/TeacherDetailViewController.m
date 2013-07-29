@@ -18,6 +18,7 @@
 @interface TeacherDetailViewController ()
 {
     AddressBook *teacher;
+    NSString *phone;
 }
 @end
 
@@ -44,12 +45,10 @@
 }
 
 - (IBAction)sendMessage:(id)sender {
-    SqliteData *util = [[SqliteData alloc] init];
-    BOOL isFriend = [util isFriend:teacher.userId];
-    if (!isFriend) {
-        [util addFriend:teacher];
-    }
-    
+    UIWebView * callWebView = [[UIWebView alloc] init];
+    NSURL *telURL = [NSURL URLWithString:[NSString stringWithFormat:@"tel:%@",phone]];
+    [callWebView loadRequest:[NSURLRequest requestWithURL:telURL]];
+    [self.view addSubview:callWebView];
 }
 
 - (void) initDraw: (NSString *)uid
@@ -67,7 +66,9 @@
             self.typeLabel.text = teacher.label;
             self.tutorWay.text = teacher.tutorWay;
             self.info.text = teacher.info;
-
+            phone = teacher.phone;
+            [self.phoneButton setTitle:phone forState:UIControlStateNormal];
+            
             [DejalBezelActivityView removeView];
         });
     });
