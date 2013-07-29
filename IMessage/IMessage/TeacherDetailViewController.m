@@ -14,7 +14,6 @@
 #import "DejalActivityView.h"
 #import "IMessageAppDelegate.h"
 #import "SqliteData.h"
-#import "TalkMessageViewController.h"
 
 @interface TeacherDetailViewController ()
 {
@@ -51,9 +50,6 @@
         [util addFriend:teacher];
     }
     
-    TalkMessageViewController *talkController = [[TalkMessageViewController alloc] init];
-    [talkController setChatWithUser:teacher.userId];
-    [self.navigationController pushViewController:talkController animated:YES];
 }
 
 - (void) initDraw: (NSString *)uid
